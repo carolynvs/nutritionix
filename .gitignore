@@ -1,6 +1,7 @@
 *.dll
 *.suo
 *.user
+*.nupkg
 *ReSharper*
 bin
 Bin

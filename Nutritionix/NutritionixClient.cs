@@ -1,6 +1,4 @@
-using System.Linq;
 using System.Net.Http;
-using System.Web;
 using Newtonsoft.Json;
 
 namespace Nutritionix
@@ -10,10 +8,6 @@ namespace Nutritionix
         private string _appId;
         private string _appKey;
 
-        private const string _rootUrl = "http://devapi.nutritionix.com/v1/api/item/";
-        private const string _queryUrl = _rootUrl + "?query={2}&count={3}&start={4}&appId={0}&appKey={1}";
-        private const string _itemUrl = _rootUrl + "{2}?appId={0}&appKey={1}";
-        
         public void Initialize(string appId, string appKey)
         {
             _appId = appId;
@@ -22,27 +16,25 @@ namespace Nutritionix
 
         public NutritionixSearchResponse Search(NutritionixSearchRequest request)
         {
-            using (var client = new HttpClient())
-            {
-                string uri = BuildUri(_queryUrl, _appId, _appKey, request.Query, request.Count, request.Start);
-                HttpResponseMessage response = client.GetAsync(uri).Result;
+            var searchUri = new SearchUri(_appId, _appKey, request);
+            var response = Get<NutritionixSearchResponse>(searchUri);
 
-                if (!response.IsSuccessStatusCode)
-                {
-                    var error = ReadResponse<NutritionixErrorResponse>(response);
-                    throw new NutritionixException(error);
-                }
+            response.Results = response.Results ?? new NutritionixSearchResult[0];
 
-                return ReadResponse<NutritionixSearchResponse>(response);
-            }
+            return response;
         }
 
         public NutritionixItem Retrieve(string id)
         {
-            using (var client = new HttpClient())
+            var itemUri = new RetrieveUri(_appId, _appKey, id);
+            return Get<NutritionixItem>(itemUri);
+        }
+
+        private static TResult Get<TResult>(NutritionixUriBase uri)
+        {
+            using(var client = new HttpClient())
             {
-                string uri = BuildUri(_itemUrl, _appId, _appKey, id);
-                HttpResponseMessage response = client.GetAsync(uri).Result;
+                var response = client.GetAsync(uri.ToString()).Result;
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -50,7 +42,7 @@ namespace Nutritionix
                     throw new NutritionixException(error);
                 }
 
-                return ReadResponse<NutritionixItem>(response);
+                return ReadResponse<TResult>(response);
             }
         }
 
@@ -58,12 +50,6 @@ namespace Nutritionix
         {
             string content = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<T>(content);
-        }
-
-        private static string BuildUri(string uri, params object[] args)
-        {
-            object[] escapedArgs = args.Select(x => HttpUtility.UrlEncode(x.ToString())).OfType<object>().ToArray();
-            return string.Format(uri, escapedArgs);
         }
     }
 }
