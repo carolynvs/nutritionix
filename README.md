@@ -1,10 +1,13 @@
 # Nutritionix Client Library for .NET
 ===========
 
-This is a client library for the [Nutritionix](http://www.nutritionix.com/) API.
+This is a client library for the [Nutritionix](http://www.nutritionix.com/) API. It is also available as a NuGet package.
+
+[Nutritionix NuGet Package](https://nuget.org/packages/Nutritionix)  
+[Nutritionix.Sample NuGet Package](https://nuget.org/packages/Nutritionix.Sample)
 
 ## Use
-```net
+```csharp
 using Nutritionix;
 
 namespace MyApp
