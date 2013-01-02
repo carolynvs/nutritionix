@@ -11,7 +11,7 @@ namespace Nutritionix
         private string _appKey;
 
         private const string _rootUrl = "http://devapi.nutritionix.com/v1/api/item/";
-        private const string _queryUrl = _rootUrl + "?query={2}&appId={0}&appKey={1}";
+        private const string _queryUrl = _rootUrl + "?query={2}&count={3}&start={4}&appId={0}&appKey={1}";
         private const string _itemUrl = _rootUrl + "{2}?appId={0}&appKey={1}";
         
         public void Initialize(string appId, string appKey)
@@ -24,7 +24,7 @@ namespace Nutritionix
         {
             using (var client = new HttpClient())
             {
-                string uri = BuildUri(_queryUrl, _appId, _appKey, request.Query);
+                string uri = BuildUri(_queryUrl, _appId, _appKey, request.Query, request.Count, request.Start);
                 HttpResponseMessage response = client.GetAsync(uri).Result;
 
                 if (!response.IsSuccessStatusCode)

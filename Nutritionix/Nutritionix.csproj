@@ -42,6 +42,8 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Allergen.cs" />
+    <Compile Include="DietaryConstraint.cs" />
     <Compile Include="INutritionixClient.cs" />
     <Compile Include="NutritionFact.cs" />
     <Compile Include="NutritionFactType.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="NutritionixSearchResult.cs" />
     <Compile Include="NutritionixUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelatedSize.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

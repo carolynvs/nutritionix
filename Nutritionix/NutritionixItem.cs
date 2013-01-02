@@ -30,5 +30,14 @@ namespace Nutritionix
 
         [DataMember(Name = "nutrition_facts")]
         public List<NutritionFact> NutritionFacts { get; set; }
+
+        [DataMember(Name = "allergens")]
+        public List<Allergen> Allergens { get; set; }
+
+        [DataMember(Name = "dietary_constraints")]
+        public List<DietaryConstraint> DietaryConstraints { get; set; }
+
+        [DataMember(Name = "related_sizes")]
+        public List<RelatedSize> RelatedSizes { get; set; } 
     }
 }
