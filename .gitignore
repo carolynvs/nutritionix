@@ -1,0 +1,12 @@
+*.dll
+*.suo
+*.user
+*ReSharper*
+bin
+Bin
+obj
+csx
+packages
+out
+TestResults
+*.DotSettings
