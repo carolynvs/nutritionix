@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutritionix", "Nutritionix\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutritionix.Sample", "Nutritionix.Sample\Nutritionix.Sample.csproj", "{4005CF66-B61D-4592-88A1-41D5FBF011C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutritionix.Tests", "Nutritionix.Tests\Nutritionix.Tests.csproj", "{291324C5-BEF3-467C-8B88-E8B2070C10FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{4005CF66-B61D-4592-88A1-41D5FBF011C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4005CF66-B61D-4592-88A1-41D5FBF011C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4005CF66-B61D-4592-88A1-41D5FBF011C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{291324C5-BEF3-467C-8B88-E8B2070C10FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{291324C5-BEF3-467C-8B88-E8B2070C10FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{291324C5-BEF3-467C-8B88-E8B2070C10FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{291324C5-BEF3-467C-8B88-E8B2070C10FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,27 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-    <metadata>
-        <id>Nutritionix</id>
-        <version>1.0.2</version>
-        <title />
-        <authors>Carolyn Van Slyck</authors>
-        <owners />
-        <licenseUrl>https://github.com/carolynvs/nutritionix/blob/master/MIT-License.txt</licenseUrl>
-        <projectUrl>https://github.com/carolynvs/nutritionix</projectUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Nutritionix API Client Library</description>
-        <dependencies>
-            <dependency id="Newtonsoft.Json" version="4.5.11" />
-            <dependency id="Microsoft.Net.Http" version="2.0.20710.0" />
-        </dependencies>
-        <frameworkAssemblies>
-            <frameworkAssembly assemblyName="System" targetFramework="" />
-            <frameworkAssembly assemblyName="System.Core" targetFramework="" />
-            <frameworkAssembly assemblyName="System.Runtime.Serialization" targetFramework="" />
-            <frameworkAssembly assemblyName="System.Web" targetFramework="" />
-        </frameworkAssemblies>
-    </metadata>
-    <files>
-        <file src="..\Nutritionix\bin\Release\Nutritionix.dll" target="lib\Nutritionix.dll" />
-    </files>
+  <metadata>
+    <id>Nutritionix</id>
+    <version>1.0.3</version>
+    <title />
+    <authors>Carolyn Van Slyck</authors>
+    <owners />
+    <licenseUrl>https://github.com/carolynvs/nutritionix/blob/master/MIT-License.txt</licenseUrl>
+    <projectUrl>https://github.com/carolynvs/nutritionix</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Nutritionix API Client Library</description>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="4.5.11" />
+      <dependency id="Microsoft.Net.Http" version="2.0.20710.0" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Runtime.Serialization" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Web" targetFramework="" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="..\Nutritionix\bin\Release\Nutritionix.dll" target="lib\Nutritionix.dll" />
+    <file src="..\Nutritionix\bin\Release\Nutritionix.xml" target="lib\Nutritionix.xml" />
+  </files>
 </package>

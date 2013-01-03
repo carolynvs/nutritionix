@@ -1,16 +1,15 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Resources;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Nutritionix")]
-[assembly: AssemblyDescription("Nutritionix Client Library for .NET")]
+[assembly: AssemblyTitle("Nutritionix.Tests")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Carolyn Van Slyck")]
-[assembly: AssemblyProduct("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Nutritionix.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +20,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5f09fa12-af72-480a-8ad4-1bde097065a8")]
+[assembly: Guid("6374f2a6-de08-484f-be12-57698f55582f")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -33,6 +32,5 @@ using System.Resources;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.3.0")]
-[assembly: AssemblyFileVersion("1.0.3.0")]
-[assembly: NeutralResourcesLanguageAttribute("")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
