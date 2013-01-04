@@ -16,6 +16,16 @@ namespace Nutritionix.Tests
         }
 
         [Test]
+        public void ToString_ContainsBrandId()
+        {
+            var request = new NutritionixSearchRequest { BrandId = "myBrandId" };
+            var uri = new SearchUri("myId", "myKey", request);
+            var result = uri.ToString();
+
+            Assert.IsTrue(result.Contains("brand_id=myBrandId"));
+        }
+
+        [Test]
         public void ToString_ContainsStart()
         {
             var request = new NutritionixSearchRequest {Query = "myQuery", Start = 5};

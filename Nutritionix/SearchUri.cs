@@ -8,6 +8,7 @@ namespace Nutritionix
     public class SearchUri : NutritionixUri
     {
         private const string QueryParam = "query";
+        private const string BrandIdParam = "brand_id";
         private const string StartParam = "start";
         private const string CountParam = "count";
 
@@ -33,6 +34,7 @@ namespace Nutritionix
         {
             base.UpdateQueryString(queryString);
             queryString.Add(QueryParam, _request.Query);
+            queryString.Add(BrandIdParam, _request.BrandId);
             queryString.Add(StartParam, _request.Start.ToString());
             queryString.Add(CountParam, _request.Count.ToString());
         }

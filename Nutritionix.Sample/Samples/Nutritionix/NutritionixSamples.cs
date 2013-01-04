@@ -14,6 +14,7 @@ namespace Samples.Nutritionix
         {
             Search();
 			Retrieve();
+            RetrieveByBrand();
         }
 
         public static void Search()
@@ -51,6 +52,24 @@ namespace Samples.Nutritionix
 
             var sugar = item.NutritionFacts.First(x => x.Name == NutritionFactType.Sugars);
             Console.WriteLine("Sugar: {0} {1}", sugar.Value, sugar.Unit);
+
+            Console.WriteLine();
+        }
+
+        public static void RetrieveByBrand()
+        {
+            var nutritionix = new NutritionixClient();
+            nutritionix.Initialize(myApiId, myApiKey);
+
+            var request = new NutritionixSearchRequest { BrandId = "ONZJUDhPRs1SKbB" };
+            Console.WriteLine("Searching Nutritionix for the Olive Garden brand...");
+            NutritionixSearchResponse response = nutritionix.Search(request);
+
+            Console.WriteLine("Displaying results 1 - {0} of {1}", response.TotalResultsReturned, response.TotalResultsMatching);
+            foreach (NutritionixSearchResult result in response.Results)
+            {
+                Console.WriteLine("* {0}", result.ItemName);
+            }
 
             Console.WriteLine();
         }
