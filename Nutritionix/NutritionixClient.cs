@@ -50,7 +50,7 @@ namespace Nutritionix
             return Get<NutritionixItem>(itemUri);
         }
 
-        private static TResult Get<TResult>(NutritionixUriBase uri) where TResult : new()
+        private static TResult Get<TResult>(NutritionixUri uri) where TResult : new()
         {
             using(var client = Factory.CreateHttpClient())
             {
@@ -65,7 +65,7 @@ namespace Nutritionix
             }
         }
 
-        private static HttpResponseMessage MakeRequest(NutritionixUriBase uri, HttpClient client)
+        private static HttpResponseMessage MakeRequest(NutritionixUri uri, HttpClient client)
         {
             try
             {

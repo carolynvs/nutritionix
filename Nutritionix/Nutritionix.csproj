@@ -59,7 +59,7 @@
     <Compile Include="NutritionixSearchResponse.cs" />
     <Compile Include="NutritionixSearchResult.cs" />
     <Compile Include="NutritionixUnit.cs" />
-    <Compile Include="NutritionixUriBase.cs" />
+    <Compile Include="NutritionixUri.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelatedSize.cs" />
     <Compile Include="RetrieveUri.cs" />
