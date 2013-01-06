@@ -2,6 +2,9 @@ using System.Runtime.Serialization;
 
 namespace Nutritionix
 {
+    /// <summary>
+    /// Result returned from a Nutritionix search
+    /// </summary>
     [DataContract]
     public class NutritionixSearchResult
     {
@@ -10,6 +13,9 @@ namespace Nutritionix
 
         [DataMember(Name = "item_name")]
         public string ItemName { get; set; }
+
+        [DataMember(Name = "brand_id")]
+        public string BrandId { get; set; }
 
         [DataMember(Name = "brand_name")]
         public string BrandName { get; set; }
