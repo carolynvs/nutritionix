@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutritionix", "Nutritionix\Nutritionix.csproj", "{7B38F2B3-2184-4E40-A420-7B67CC267E0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutritionix.Sample", "Nutritionix.Sample\Nutritionix.Sample.csproj", "{4005CF66-B61D-4592-88A1-41D5FBF011C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutritionix.Samples", "Nutritionix.Sample\Nutritionix.Samples.csproj", "{4005CF66-B61D-4592-88A1-41D5FBF011C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutritionix.Tests", "Nutritionix.Tests\Nutritionix.Tests.csproj", "{291324C5-BEF3-467C-8B88-E8B2070C10FF}"
 EndProject

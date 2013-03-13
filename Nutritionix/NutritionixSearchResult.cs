@@ -1,29 +1,51 @@
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Nutritionix
 {
     /// <summary>
     /// Result returned from a Nutritionix search
     /// </summary>
-    [DataContract]
+    [JsonObject]
     public class NutritionixSearchResult
     {
-        [DataMember(Name = "item_id")]
-        public string ItemId { get; set; }
+        /// <summary>
+        /// Search result item id, equivalent to Item.ItemId
+        /// </summary>
+        [JsonProperty("_id")]
+        public string Id { get; set; }
 
-        [DataMember(Name = "item_name")]
-        public string ItemName { get; set; }
+        /// <summary>
+        /// Search result index
+        /// </summary>
+        [JsonProperty("_index")]
+        public string Index { get; set; }
 
-        [DataMember(Name = "brand_id")]
-        public string BrandId { get; set; }
+        /// <summary>
+        /// Search result type
+        /// </summary>
+        [JsonProperty("_type")]
+        public string Type { get; set; }
 
-        [DataMember(Name = "brand_name")]
-        public string BrandName { get; set; }
+        /// <summary>
+        /// Search score
+        /// </summary>
+        [JsonProperty("_score")]
+        public double Score { get; set; }
 
-        [DataMember(Name = "calories")]
-        public string Calories { get; set; }
+        /// <summary>
+        /// Matching item
+        /// </summary>
+        [JsonProperty("item")]
+        public NutritionixItem Item
+        {
+            get { return _source ?? _fields; }
+        }
 
-        [DataMember(Name = "calories_unit")]
-        public string CaloriesUnit { get; set; }
+        [JsonProperty("fields")]
+        private NutritionixItem _fields;
+
+        [JsonProperty("_source")]
+        private NutritionixItem _source;
     }
 }

@@ -8,12 +8,13 @@ namespace Nutritionix
     /// </summary>
     public class NutritionixException : Exception
     {
-        public NutritionixException(string message) : base(message)
+        internal NutritionixException(string message) : base(message)
         {
             
         }
 
-        public NutritionixException(NutritionixErrorResponse response) : base("The Nutritionix API returned an error response.")
+        internal NutritionixException(NutritionixErrorResponse response)
+            : base("The Nutritionix API returned an error response.")
         {
             if(response != null)
             {
@@ -21,6 +22,9 @@ namespace Nutritionix
             }
         }
 
+        /// <summary>
+        /// The errors returned from the Nutritionix API
+        /// </summary>
         public NutritionixError[] Errors { get; set; }
     }
 }

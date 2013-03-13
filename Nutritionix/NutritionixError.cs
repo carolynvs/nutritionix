@@ -1,14 +1,24 @@
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Nutritionix
 {
-    [DataContract]
+    /// <summary>
+    /// Nutritionix Error
+    /// </summary>
+    [JsonObject]
     public class NutritionixError
     {
-        [DataMember(Name = "code")]
+        /// <summary>
+        /// Error code
+        /// </summary>
+        [JsonProperty("code")]
         public string Code { get; set; }
 
-        [DataMember(Name = "message")]
+        /// <summary>
+        /// Error message
+        /// </summary>
+        [JsonProperty("message")]
         public string Message { get; set; }
     }
 }

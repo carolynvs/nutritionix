@@ -5,7 +5,7 @@ namespace Nutritionix
     /// <summary>
     /// Factory class for creating instances of mockable dependencies
     /// </summary>
-    public static class Factory
+    internal static class Factory
     {
         public static HttpMessageHandler MockHttpClient;
 

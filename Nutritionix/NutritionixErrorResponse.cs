@@ -1,11 +1,12 @@
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Nutritionix
 {
-    [DataContract]
-    public class NutritionixErrorResponse
+    [JsonObject]
+    internal class NutritionixErrorResponse
     {
-        [DataMember(Name = "error")]
+        [JsonProperty("error")]
         public NutritionixError[] Errors { get; set; }
     }
 }

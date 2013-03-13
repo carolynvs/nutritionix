@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Nutritionix.Sample
+namespace Nutritionix.Samples
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Samples.Nutritionix.NutritionixSamples.RunAll();
+            NutritionixSamples.RunAll();
 
             Console.WriteLine("Press any key to exit");
             Console.ReadLine();

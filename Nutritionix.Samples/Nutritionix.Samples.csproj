@@ -7,8 +7,8 @@
     <ProjectGuid>{4005CF66-B61D-4592-88A1-41D5FBF011C5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nutritionix.Sample</RootNamespace>
-    <AssemblyName>Nutritionix.Sample</AssemblyName>
+    <RootNamespace>Nutritionix.Samples</RootNamespace>
+    <AssemblyName>Nutritionix.Samples</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

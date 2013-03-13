@@ -44,12 +44,8 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Allergen.cs" />
-    <Compile Include="DietaryConstraint.cs" />
     <Compile Include="Factory.cs" />
-    <Compile Include="INutritionixClient.cs" />
-    <Compile Include="NutritionFact.cs" />
-    <Compile Include="NutritionFactType.cs" />
+    <Compile Include="NutritionixBrand.cs" />
     <Compile Include="NutritionixClient.cs" />
     <Compile Include="NutritionixError.cs" />
     <Compile Include="NutritionixErrorResponse.cs" />
@@ -58,12 +54,11 @@
     <Compile Include="NutritionixSearchRequest.cs" />
     <Compile Include="NutritionixSearchResponse.cs" />
     <Compile Include="NutritionixSearchResult.cs" />
-    <Compile Include="NutritionixUnit.cs" />
-    <Compile Include="NutritionixUri.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RelatedSize.cs" />
-    <Compile Include="RetrieveUri.cs" />
-    <Compile Include="SearchUri.cs" />
+    <Compile Include="Uris\NutritionixUri.cs" />
+    <Compile Include="Uris\RetrieveBrandUri.cs" />
+    <Compile Include="Uris\RetrieveItemUri.cs" />
+    <Compile Include="Uris\SearchUri.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

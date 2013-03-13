@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.Web;
+using NUnit.Framework;
+using Nutritionix.Uris;
 
 namespace Nutritionix.Tests
 {
@@ -12,27 +14,17 @@ namespace Nutritionix.Tests
             var uri = new SearchUri("myId", "myKey", request);
             var result = uri.ToString();
 
-            Assert.IsTrue(result.Contains("query=myQuery"));
+            Assert.IsTrue(result.Contains("/myQuery?"));
         }
 
         [Test]
         public void ToString_ContainsBrandId()
         {
-            var request = new NutritionixSearchRequest { BrandId = "myBrandId" };
+            var request = new NutritionixSearchRequest { BrandId = "myBrandId"};
             var uri = new SearchUri("myId", "myKey", request);
             var result = uri.ToString();
 
             Assert.IsTrue(result.Contains("brand_id=myBrandId"));
-        }
-
-        [Test]
-        public void ToString_ContainsStart()
-        {
-            var request = new NutritionixSearchRequest {Query = "myQuery", Start = 5};
-            var uri = new SearchUri("myId", "myKey", request);
-            var result = uri.ToString();
-
-            Assert.IsTrue(result.Contains("start=5"));
         }
 
         [Test]
@@ -42,7 +34,21 @@ namespace Nutritionix.Tests
             var uri = new SearchUri("myId", "myKey", request);
             var result = uri.ToString();
 
-            Assert.IsTrue(result.Contains("count=20"));
+            result = HttpUtility.UrlDecode(result);
+
+            Assert.IsTrue(result.Contains("results=0:20"));
+        }
+
+        [Test]
+        public void ToString_ContainsStart()
+        {
+            var request = new NutritionixSearchRequest { Query = "myQuery", Start = 100, Count = 50};
+            var uri = new SearchUri("myId", "myKey", request);
+            var result = uri.ToString();
+
+            result = HttpUtility.UrlDecode(result);
+
+            Assert.IsTrue(result.Contains("results=100:150"));
         }
 
         [Test]
@@ -52,8 +58,7 @@ namespace Nutritionix.Tests
             var uri = new SearchUri("myId", "myKey", request);
             var result = uri.ToString();
 
-            Assert.IsFalse(result.Contains("start="), "Start should not be in the URI since no explicit value was specified.");
-            Assert.IsFalse(result.Contains("count="), "Count should not be in the URI since no explicit value was specified.");
+            Assert.IsFalse(result.Contains("results="), "Result range should not be in the URI since no explicit value was specified.");
         }
     }
 }

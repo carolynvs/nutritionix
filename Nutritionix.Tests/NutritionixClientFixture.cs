@@ -22,8 +22,7 @@ namespace Nutritionix.Tests
         {
             var sampleResponse = new NutritionixSearchResponse
                 {
-                    TotalResultsMatching = 0,
-                    TotalResultsReturned = 0,
+                    TotalResults = 0,
                     Results = null
                 };
             string json = JsonConvert.SerializeObject(sampleResponse);
@@ -31,7 +30,7 @@ namespace Nutritionix.Tests
 
             var client = new NutritionixClient();
             var request = new NutritionixSearchRequest { Query = "foobar" };
-            NutritionixSearchResponse response = client.Search(request);
+            NutritionixSearchResponse response = client.SearchItems(request);
 
             Assert.IsNotNull(response.Results);
             Assert.AreEqual(0, response.Results.Length);
@@ -42,8 +41,7 @@ namespace Nutritionix.Tests
         {
             var sampleResponse = new NutritionixSearchResponse
                 {
-                    TotalResultsMatching = 1,
-                    TotalResultsReturned = 1,
+                    TotalResults = 1,
                     Results = new[] { new NutritionixSearchResult() }
                 };
             string json = JsonConvert.SerializeObject(sampleResponse);
@@ -51,7 +49,7 @@ namespace Nutritionix.Tests
 
             var client = new NutritionixClient();
             var request = new NutritionixSearchRequest { Query = "foobar" };
-            NutritionixSearchResponse response = client.Search(request);
+            NutritionixSearchResponse response = client.SearchItems(request);
 
             Assert.AreEqual(1, response.Results.Length);
         }
@@ -64,7 +62,7 @@ namespace Nutritionix.Tests
 
             var client = new NutritionixClient();
             var request = new NutritionixSearchRequest{Query = "foobar"};
-            client.Search(request);
+            client.SearchItems(request);
         }
 
         [Test]
@@ -75,7 +73,7 @@ namespace Nutritionix.Tests
 
             var client = new NutritionixClient();
             var request = new NutritionixSearchRequest { Query = "foobar" };
-            NutritionixSearchResponse response = client.Search(request);
+            NutritionixSearchResponse response = client.SearchItems(request);
 
             Assert.AreEqual(0, response.Results.Length);
         }
@@ -93,7 +91,7 @@ namespace Nutritionix.Tests
 
             var client = new NutritionixClient();
             var request = new NutritionixSearchRequest { Query = "foobar" };
-            client.Search(request);
+            client.SearchItems(request);
         }
 
         private void MockResponse(string json, HttpStatusCode status = HttpStatusCode.OK)

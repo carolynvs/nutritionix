@@ -1,8 +1,46 @@
 using System.Net.Http;
 using Newtonsoft.Json;
+using Nutritionix.Uris;
 
 namespace Nutritionix
 {
+    /// <summary>
+    /// Client interface for accessing the Nutritionix API
+    /// </summary>
+    public interface INutritionixClient
+    {
+        /// <summary>
+        /// Sets the credentials to be used when querying the Nutritionix API.  Must be called before making any requests.
+        /// </summary>
+        /// <param name="appId">Your developer application id</param>
+        /// <param name="appKey">Your developer application key</param>
+        void Initialize(string appId, string appKey);
+
+        /// <summary>
+        /// Searches Nutritionix for items matching the specified query.
+        /// </summary>
+        /// <param name="request">The query.</param>
+        /// <returns>The search response from the Nutritionix API.</returns>
+        /// <exception cref="Nutritionix.NutritionixException"></exception>
+        NutritionixSearchResponse SearchItems(NutritionixSearchRequest request);
+
+        /// <summary>
+        /// Retrieves the specified item from Nutritionix
+        /// </summary>
+        /// <param name="id">The item id</param>
+        /// <returns>The requested item or null</returns>
+        /// <exception cref="Nutritionix.NutritionixException"></exception>
+        NutritionixItem RetrieveItem(string id);
+
+        /// <summary>
+        /// Retrieves the specified brand from Nutritionix
+        /// </summary>
+        /// <param name="id">The brand id</param>
+        /// <returns>The requested brand or null</returns>
+        /// <exception cref="Nutritionix.NutritionixException"></exception>
+        NutritionixBrand RetrieveBrand(string id);
+    }
+
     /// <summary>
     /// Client for accessing the Nutritionix API
     /// </summary>
@@ -28,7 +66,7 @@ namespace Nutritionix
         /// <param name="request">The query.</param>
         /// <returns>The search response from the Nutritionix API.</returns>
         /// <exception cref="Nutritionix.NutritionixException"></exception>
-        public NutritionixSearchResponse Search(NutritionixSearchRequest request)
+        public NutritionixSearchResponse SearchItems(NutritionixSearchRequest request)
         {
             var searchUri = new SearchUri(_appId, _appKey, request);
             var response = Get<NutritionixSearchResponse>(searchUri);
@@ -44,10 +82,22 @@ namespace Nutritionix
         /// <param name="id">The item id</param>
         /// <returns>The requested item or null</returns>
         /// <exception cref="Nutritionix.NutritionixException"></exception>
-        public NutritionixItem Retrieve(string id)
+        public NutritionixItem RetrieveItem(string id)
         {
-            var itemUri = new RetrieveUri(_appId, _appKey, id);
+            var itemUri = new RetrieveItemUri(_appId, _appKey, id);
             return Get<NutritionixItem>(itemUri);
+        }
+
+        /// <summary>
+        /// Retrieves the specified brand from the Nutritionix API
+        /// </summary>
+        /// <param name="id">The brand id</param>
+        /// <returns>The requested brand or null</returns>
+        /// <exception cref="Nutritionix.NutritionixException"></exception>
+        public NutritionixBrand RetrieveBrand(string id)
+        {
+            var itemUri = new RetrieveBrandUri(_appId, _appKey, id);
+            return Get<NutritionixBrand>(itemUri);
         }
 
         private static TResult Get<TResult>(NutritionixUri uri) where TResult : new()
