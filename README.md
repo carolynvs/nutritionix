@@ -23,7 +23,7 @@ namespace MyApp
             nutritionix.Initialize(myApiId, myApiKey);
 
             var request = new NutritionixSearchRequest { Query = query };
-            NutritionixSearchResponse response = nutritionix.Search(request);
+            NutritionixSearchResponse response = nutritionix.SearchItems(request);
 
             return response.Results;
         }
@@ -33,7 +33,7 @@ namespace MyApp
             var nutritionix = new NutritionixClient();
             nutritionix.Initialize(myApiId, myApiKey);
 
-            return nutritionix.Retrieve(id);
+            return nutritionix.RetrieveItem(id);
         }
     }
 }
