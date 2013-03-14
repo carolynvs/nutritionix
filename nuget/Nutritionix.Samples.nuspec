@@ -15,6 +15,6 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="..\Nutritionix.Sample\Samples\Nutritionix\NutritionixSamples.cs" target="content\Samples\Nutritionix\NutritionixSamples.cs" />
+        <file src="..\Nutritionix.Samples\Samples\Nutritionix\NutritionixSamples.cs" target="content\Samples\Nutritionix\NutritionixSamples.cs" />
     </files>
 </package>
