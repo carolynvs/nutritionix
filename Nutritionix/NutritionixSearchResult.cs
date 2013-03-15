@@ -36,11 +36,21 @@ namespace Nutritionix
         /// <summary>
         /// Matching item
         /// </summary>
-        [JsonProperty("item")]
+        [JsonIgnore]
         public NutritionixItem Item
         {
-            get { return _source ?? _fields; }
+            get
+            {
+                if(_item == null)
+                    return _source ?? _fields;
+
+                return _item;
+            }
+            set { _item = value; }
         }
+
+        [JsonIgnore]
+        private NutritionixItem _item;
 
         [JsonProperty("fields")]
         private NutritionixItem _fields;

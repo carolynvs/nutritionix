@@ -8,11 +8,17 @@ namespace Nutritionix
     /// </summary>
     public class NutritionixException : Exception
     {
-        internal NutritionixException(string message) : base(message)
+        /// <summary>
+        /// Create a new <see cref="NutritionixException"/> from an error message
+        /// </summary>
+        public NutritionixException(string message) : base(message)
         {
             
         }
 
+        /// <summary>
+        /// Creates a new <see cref="NutritionixException"/> from a error response
+        /// </summary>
         internal NutritionixException(NutritionixErrorResponse response)
             : base("The Nutritionix API returned an error response.")
         {

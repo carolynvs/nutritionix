@@ -60,6 +60,14 @@ namespace Nutritionix
             _appKey = appKey;
         }
 
+        private void CheckInitialized()
+        {
+            if(_appId == null && _appKey == null)
+            {
+                throw new NutritionixException("You must call Initialize on the NutritionixClient before executing any other commands.");
+            }
+        }
+
         /// <summary>
         /// Searches Nutritionix for items matching the specified query.
         /// </summary>
@@ -68,6 +76,8 @@ namespace Nutritionix
         /// <exception cref="Nutritionix.NutritionixException"></exception>
         public NutritionixSearchResponse SearchItems(NutritionixSearchRequest request)
         {
+            CheckInitialized();
+
             var searchUri = new SearchUri(_appId, _appKey, request);
             var response = Get<NutritionixSearchResponse>(searchUri);
 
@@ -84,6 +94,8 @@ namespace Nutritionix
         /// <exception cref="Nutritionix.NutritionixException"></exception>
         public NutritionixItem RetrieveItem(string id)
         {
+            CheckInitialized();
+
             var itemUri = new RetrieveItemUri(_appId, _appKey, id);
             return Get<NutritionixItem>(itemUri);
         }
@@ -96,6 +108,8 @@ namespace Nutritionix
         /// <exception cref="Nutritionix.NutritionixException"></exception>
         public NutritionixBrand RetrieveBrand(string id)
         {
+            CheckInitialized();
+
             var itemUri = new RetrieveBrandUri(_appId, _appKey, id);
             return Get<NutritionixBrand>(itemUri);
         }
