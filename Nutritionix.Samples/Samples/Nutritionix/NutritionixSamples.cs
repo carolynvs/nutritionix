@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using Nutritionix;
 
 namespace Nutritionix.Samples
 {
@@ -14,6 +12,7 @@ namespace Nutritionix.Samples
         {
             SearchItems();
 			RetrieveItem();
+            RetrieveItemByUPC();
             RetrieveBrand();
             RetrieveItemsByBrand();
         }
@@ -43,6 +42,25 @@ namespace Nutritionix.Samples
 
             Console.WriteLine("Retrieving 'Raspberry Pie' from Nutritionix...");
             NutritionixItem item = nutritionix.RetrieveItem("513fc995927da70408002d76");
+
+            Console.WriteLine("Item Id: {0}", item.Id);
+            Console.WriteLine("Item Name: {0}", item.Name);
+            Console.WriteLine("Brand Name: {0}", item.BrandName);
+
+            Console.WriteLine("Calories: {0}", item.NutritionFact_Calories);
+            Console.WriteLine("Sugar: {0} g", item.NutritionFact_Sugar);
+
+            Console.WriteLine();
+        }
+
+        public static void RetrieveItemByUPC()
+        {
+            var nutritionix = new NutritionixClient();
+            nutritionix.Initialize(myApiId, myApiKey);
+
+            const string upc = "029000071087";
+            Console.WriteLine("Looking up UPC code: {0}...", upc);
+            NutritionixItem item = nutritionix.RetrieveItemByUPC(upc);
 
             Console.WriteLine("Item Id: {0}", item.Id);
             Console.WriteLine("Item Name: {0}", item.Name);

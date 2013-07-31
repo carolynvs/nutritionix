@@ -15,8 +15,8 @@ namespace Nutritionix.Tests
         [SetUp]
         public void Setup()
         {
-            Factory.MockHttpClient = _mockHttp = MockRepository.GeneratePartialMock<FakeHttpMessageHandler>();
-            _nutritionix = new NutritionixClient();
+            _mockHttp = MockRepository.GeneratePartialMock<FakeHttpMessageHandler>();
+            _nutritionix = new NutritionixClient(() => new HttpClient(_mockHttp));
             _nutritionix.Initialize("myAppId", "myAppKey");
         }
 

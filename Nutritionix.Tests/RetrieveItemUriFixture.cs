@@ -10,27 +10,40 @@ namespace Nutritionix.Tests
         public void ToString_ContainsAppId()
         {
             var uri = new RetrieveItemUri("myId", "myKey", "itemId");
-            var result = uri.ToString();
+            
+            string result = uri.ToString();
 
-            Assert.IsTrue(result.Contains("appId=myId"));
+            StringAssert.Contains("appId=myId", result);
         }
 
         [Test]
         public void ToString_ContainsAppKey()
         {
             var uri = new RetrieveItemUri("myId", "myKey", "itemId");
-            var result = uri.ToString();
+            
+            string result = uri.ToString();
 
-            Assert.IsTrue(result.Contains("appKey=myKey"));
+            StringAssert.Contains("appKey=myKey", result);
         }
 
         [Test]
         public void ToString_ContainsItemId()
         {
             var uri = new RetrieveItemUri("myId", "myKey", "itemId");
-            var result = uri.ToString();
+            
+            string result = uri.ToString();
 
-            Assert.IsTrue(result.Contains("item/itemId"));
+            StringAssert.Contains("id=itemId", result);
+        }
+
+        [Test]
+        public void ToString_ContainsUPC()
+        {
+            var uri = new RetrieveItemUri("myId", "myKey", upc: "myUPC");
+            
+            string result = uri.ToString();
+
+            StringAssert.Contains("upc=myUPC", result);
         }
     }
 }

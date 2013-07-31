@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.Web;
 using NUnit.Framework;
 using Nutritionix.Uris;
 
@@ -12,9 +13,10 @@ namespace Nutritionix.Tests
         {
             var request = new NutritionixSearchRequest {Query = "myQuery"};
             var uri = new SearchUri("myId", "myKey", request);
-            var result = uri.ToString();
+            
+            string result = uri.ToString();
 
-            Assert.IsTrue(result.Contains("/myQuery?"));
+            StringAssert.Contains("/myQuery?", result);
         }
 
         [Test]
@@ -22,9 +24,10 @@ namespace Nutritionix.Tests
         {
             var request = new NutritionixSearchRequest { BrandId = "myBrandId"};
             var uri = new SearchUri("myId", "myKey", request);
-            var result = uri.ToString();
+            
+            string result = uri.ToString();
 
-            Assert.IsTrue(result.Contains("brand_id=myBrandId"));
+            StringAssert.Contains("brand_id=myBrandId", result);
         }
 
         [Test]
@@ -32,11 +35,11 @@ namespace Nutritionix.Tests
         {
             var request = new NutritionixSearchRequest {Query = "myQuery", Count = 20};
             var uri = new SearchUri("myId", "myKey", request);
-            var result = uri.ToString();
-
+            
+            string result = uri.ToString();
             result = HttpUtility.UrlDecode(result);
 
-            Assert.IsTrue(result.Contains("results=0:20"));
+            StringAssert.Contains("results=0:20", result);
         }
 
         [Test]
@@ -44,11 +47,11 @@ namespace Nutritionix.Tests
         {
             var request = new NutritionixSearchRequest { Query = "myQuery", Start = 100, Count = 50};
             var uri = new SearchUri("myId", "myKey", request);
-            var result = uri.ToString();
-
+            
+            string result = uri.ToString();
             result = HttpUtility.UrlDecode(result);
 
-            Assert.IsTrue(result.Contains("results=100:150"));
+            StringAssert.Contains("results=100:150", result);
         }
 
         [Test]
@@ -56,9 +59,26 @@ namespace Nutritionix.Tests
         {
             var request = new NutritionixSearchRequest { Query = "myQuery" };
             var uri = new SearchUri("myId", "myKey", request);
-            var result = uri.ToString();
+            
+            string result = uri.ToString();
 
-            Assert.IsFalse(result.Contains("results="), "Result range should not be in the URI since no explicit value was specified.");
+            StringAssert.DoesNotContain("results=", result, "Result range should not be in the URI since no explicit value was specified.");
+        }
+
+        [Test]
+        public void ToString_ContainsExcludedAllergens()
+        {
+            var request = new NutritionixSearchRequest
+            {
+                Query = "myQuery",
+                ExcludeAllergens = new List<Allergen> {Allergen.Eggs, Allergen.Fish}
+            };
+            var uri = new SearchUri("myId", "myKey", request);
+            
+            string result = uri.ToString();
+
+            StringAssert.Contains("allergen_contains_eggs", result);
+            StringAssert.Contains("allergen_contains_fish", result);
         }
     }
 }

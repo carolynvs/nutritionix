@@ -1,5 +1,6 @@
 using System.Collections.Specialized;
 using System.Web;
+using Nutritionix.Extensions;
 
 namespace Nutritionix.Uris
 {
@@ -10,7 +11,7 @@ namespace Nutritionix.Uris
     {
         private const string AppIdParam = "appId";
         private const string AppKeyParam = "appKey";
-        private const string RootPath = "http://api.nutritionix.com/v1/";
+        private const string RootPath = "http://api.nutritionix.com/v1_1/";
 
         private readonly string _appId;
         private readonly string _appKey;
@@ -42,7 +43,7 @@ namespace Nutritionix.Uris
             {
                 string key = queryString.GetKey(i);
                 string value = queryString[key];
-                if(string.IsNullOrEmpty(value))
+                if(value.IsNullOrEmpty())
                 {
                     queryString.Remove(key);
                 }

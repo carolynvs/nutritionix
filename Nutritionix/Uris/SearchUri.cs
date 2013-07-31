@@ -1,5 +1,6 @@
 using System.Collections.Specialized;
 using System.Linq;
+using Nutritionix.Extensions;
 
 namespace Nutritionix.Uris
 {
@@ -66,6 +67,15 @@ namespace Nutritionix.Uris
             if (_request.MaximumCalories != null)
             {
                 queryString.Add(MaxCaloriesParam, _request.MinimumCalories.ToString());
+            }
+
+            if (_request.ExcludeAllergens != null)
+            {
+                foreach (Allergen allergen in _request.ExcludeAllergens)
+                {
+                    string allergenParam = allergen.ToDescription();
+                    queryString.Add(allergenParam, "false");
+                }
             }
         }
     }

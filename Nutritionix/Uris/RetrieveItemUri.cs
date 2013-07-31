@@ -1,3 +1,6 @@
+using System.Collections.Specialized;
+using Nutritionix.Extensions;
+
 namespace Nutritionix.Uris
 {
     /// <summary>
@@ -5,16 +8,33 @@ namespace Nutritionix.Uris
     /// </summary>
     internal class RetrieveItemUri : NutritionixUri
     {
-        public RetrieveItemUri(string appId, string appKey, string id) : base(appId, appKey)
+        public RetrieveItemUri(string appId, string appKey, string id = null, string upc = null) : base(appId, appKey)
         {
             _id = id;
+            _upc = upc;
         }
 
         private readonly string _id;
+        private readonly string _upc;
 
         protected override string RelativePath
         {
-            get { return string.Format("item/{0}", _id); }
+            get { return "item"; }
+        }
+
+        protected override void UpdateQueryString(NameValueCollection queryString)
+        {
+            base.UpdateQueryString(queryString);
+
+            if (!_id.IsNullOrEmpty())
+            {
+                queryString.Add("id", _id);
+            }
+
+            if (!_upc.IsNullOrEmpty())
+            {
+                queryString.Add("upc", _upc);
+            }
         }
     }
 }

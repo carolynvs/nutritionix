@@ -3,7 +3,6 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Nutritionix
 {
@@ -24,6 +23,7 @@ namespace Nutritionix
                     x => x.BrandId,
                     x => x.BrandName,
                 };
+            ExcludeAllergens = new List<Allergen>();
         }
 
         /// <summary>
@@ -51,6 +51,11 @@ namespace Nutritionix
         /// <example>Fields.Add(x => x.Calories)</example>
         /// </summary>
         public NutritionixSearchResultFieldCollection Fields { get; set; }
+
+        /// <summary>
+        /// List of <see cref="Allergen"/>s which should be excluded from the results
+        /// </summary>
+        public List<Allergen> ExcludeAllergens { get; set; }
 
         /// <summary>
         /// Include all available fields 

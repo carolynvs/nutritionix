@@ -1,11 +1,38 @@
-using System.Runtime.Serialization;
+using System.ComponentModel;
 
+// ReSharper disable CSharpWarnings::CS1591
 namespace Nutritionix
 {
-    [DataContract]
-    public class Allergen
+    /// <summary>
+    /// Types of food allergens
+    /// </summary>
+    public enum Allergen
     {
-        [DataMember(Name="type")]
-        public string Type { get; set; }
+        [Description("allergen_contains_milk")]
+        Milk,
+
+        [Description("allergen_contains_eggs")]
+        Eggs,
+        
+        [Description("allergen_contains_fish")]
+        Fish,
+        
+        [Description("allergen_contains_shellfish")]
+        Shellfish,
+        
+        [Description("allergen_contains_tree_nuts")]
+        TreeNuts,
+        
+        [Description("allergen_contains_peanuts")]
+        Peanuts,
+        
+        [Description("allergen_contains_wheat")]
+        Wheat,
+        
+        [Description("allergen_contains_soybeans")]
+        Soybeans,
+        
+        [Description("allergen_contains_gluten")]
+        Gluten
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Nutritionix.Uris;
@@ -21,7 +22,7 @@ namespace Nutritionix
         /// </summary>
         /// <param name="request">The query.</param>
         /// <returns>The search response from the Nutritionix API.</returns>
-        /// <exception cref="Nutritionix.NutritionixException"></exception>
+        /// <exception cref="Nutritionix.NutritionixException"/>
         NutritionixSearchResponse SearchItems(NutritionixSearchRequest request);
 
         /// <summary>
@@ -33,11 +34,19 @@ namespace Nutritionix
         NutritionixItem RetrieveItem(string id);
 
         /// <summary>
+        /// Retrieves the specified item from Nutritionix
+        /// </summary>
+        /// <param name="upc">The UPC</param>
+        /// <returns>The requested item or null</returns>
+        /// <exception cref="Nutritionix.NutritionixException"/>
+        NutritionixItem RetrieveItemByUPC(string upc);
+
+        /// <summary>
         /// Retrieves the specified brand from Nutritionix
         /// </summary>
         /// <param name="id">The brand id</param>
         /// <returns>The requested brand or null</returns>
-        /// <exception cref="Nutritionix.NutritionixException"></exception>
+        /// <exception cref="Nutritionix.NutritionixException"/>
         NutritionixBrand RetrieveBrand(string id);
     }
 
@@ -48,6 +57,25 @@ namespace Nutritionix
     {
         private string _appId;
         private string _appKey;
+
+        // ReSharper disable once InconsistentNaming
+        private readonly Func<HttpClient> CreateHttpClient;
+
+        /// <summary>
+        /// Create a new instance of <see cref="NutritionixClient"/>
+        /// </summary>
+        public NutritionixClient() : this(() => new HttpClient())
+        {
+            
+        }
+
+        /// <summary>
+        /// Create a new instance of <see cref="NutritionixClient"/>
+        /// </summary>
+        public NutritionixClient(Func<HttpClient> createHttpClient)
+        {
+            CreateHttpClient = createHttpClient;
+        }
 
         /// <summary>
         /// Sets the credentials to be used when querying the Nutritionix API.  Must be called before making any requests.
@@ -73,7 +101,7 @@ namespace Nutritionix
         /// </summary>
         /// <param name="request">The query.</param>
         /// <returns>The search response from the Nutritionix API.</returns>
-        /// <exception cref="Nutritionix.NutritionixException"></exception>
+        /// <exception cref="Nutritionix.NutritionixException"/>
         public NutritionixSearchResponse SearchItems(NutritionixSearchRequest request)
         {
             CheckInitialized();
@@ -91,12 +119,26 @@ namespace Nutritionix
         /// </summary>
         /// <param name="id">The item id</param>
         /// <returns>The requested item or null</returns>
-        /// <exception cref="Nutritionix.NutritionixException"></exception>
+        /// <exception cref="Nutritionix.NutritionixException"/>
         public NutritionixItem RetrieveItem(string id)
         {
             CheckInitialized();
 
-            var itemUri = new RetrieveItemUri(_appId, _appKey, id);
+            var itemUri = new RetrieveItemUri(_appId, _appKey, id: id);
+            return Get<NutritionixItem>(itemUri);
+        }
+
+        /// <summary>
+        /// Retrieves the specified item from the Nutritionix API
+        /// </summary>
+        /// <param name="upc">The UPC</param>
+        /// <returns>The requested item or null</returns>
+        /// <exception cref="Nutritionix.NutritionixException"/>
+        public NutritionixItem RetrieveItemByUPC(string upc)
+        {
+            CheckInitialized();
+
+            var itemUri = new RetrieveItemUri(_appId, _appKey, upc: upc);
             return Get<NutritionixItem>(itemUri);
         }
 
@@ -105,7 +147,7 @@ namespace Nutritionix
         /// </summary>
         /// <param name="id">The brand id</param>
         /// <returns>The requested brand or null</returns>
-        /// <exception cref="Nutritionix.NutritionixException"></exception>
+        /// <exception cref="Nutritionix.NutritionixException"/>
         public NutritionixBrand RetrieveBrand(string id)
         {
             CheckInitialized();
@@ -114,9 +156,9 @@ namespace Nutritionix
             return Get<NutritionixBrand>(itemUri);
         }
 
-        private static TResult Get<TResult>(NutritionixUri uri) where TResult : new()
+        private TResult Get<TResult>(NutritionixUri uri) where TResult : new()
         {
-            using(var client = Factory.CreateHttpClient())
+            using(var client = CreateHttpClient())
             {
                 HttpResponseMessage response = MakeRequest(uri, client);
                 if(!response.IsSuccessStatusCode)
