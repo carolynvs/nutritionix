@@ -15,7 +15,7 @@ namespace Nutritionix.Uris
         private const string MinCaloriesParam = "cal_min";
         private const string MaxCaloriesParam = "cal_max";
 
-        private readonly NutritionixSearchRequest _request;
+        private readonly SearchRequest _request;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchUri" /> class.
@@ -23,7 +23,7 @@ namespace Nutritionix.Uris
         /// <param name="appId">Your application id</param>
         /// <param name="appKey">Your application key</param>
         /// <param name="request">The search request</param>
-        public SearchUri(string appId, string appKey, NutritionixSearchRequest request) : base(appId, appKey)
+        public SearchUri(string appId, string appKey, SearchRequest request) : base(appId, appKey)
         {
             _request = request;
         }

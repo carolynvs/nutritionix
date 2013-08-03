@@ -23,7 +23,7 @@ namespace Nutritionix
         /// <param name="request">The query.</param>
         /// <returns>The search response from the Nutritionix API.</returns>
         /// <exception cref="Nutritionix.NutritionixException"/>
-        NutritionixSearchResponse SearchItems(NutritionixSearchRequest request);
+        SearchResponse SearchItems(SearchRequest request);
 
         /// <summary>
         /// Retrieves the specified item from Nutritionix
@@ -31,7 +31,7 @@ namespace Nutritionix
         /// <param name="id">The item id</param>
         /// <returns>The requested item or null</returns>
         /// <exception cref="Nutritionix.NutritionixException"></exception>
-        NutritionixItem RetrieveItem(string id);
+        Item RetrieveItem(string id);
 
         /// <summary>
         /// Retrieves the specified item from Nutritionix
@@ -39,7 +39,7 @@ namespace Nutritionix
         /// <param name="upc">The UPC</param>
         /// <returns>The requested item or null</returns>
         /// <exception cref="Nutritionix.NutritionixException"/>
-        NutritionixItem RetrieveItemByUPC(string upc);
+        Item RetrieveItemByUPC(string upc);
 
         /// <summary>
         /// Retrieves the specified brand from Nutritionix
@@ -47,7 +47,7 @@ namespace Nutritionix
         /// <param name="id">The brand id</param>
         /// <returns>The requested brand or null</returns>
         /// <exception cref="Nutritionix.NutritionixException"/>
-        NutritionixBrand RetrieveBrand(string id);
+        Brand RetrieveBrand(string id);
     }
 
     /// <summary>
@@ -102,14 +102,14 @@ namespace Nutritionix
         /// <param name="request">The query.</param>
         /// <returns>The search response from the Nutritionix API.</returns>
         /// <exception cref="Nutritionix.NutritionixException"/>
-        public NutritionixSearchResponse SearchItems(NutritionixSearchRequest request)
+        public SearchResponse SearchItems(SearchRequest request)
         {
             CheckInitialized();
 
             var searchUri = new SearchUri(_appId, _appKey, request);
-            var response = Get<NutritionixSearchResponse>(searchUri);
+            var response = Get<SearchResponse>(searchUri);
 
-            response.Results = response.Results ?? new NutritionixSearchResult[0];
+            response.Results = response.Results ?? new SearchResult[0];
 
             return response;
         }
@@ -120,12 +120,12 @@ namespace Nutritionix
         /// <param name="id">The item id</param>
         /// <returns>The requested item or null</returns>
         /// <exception cref="Nutritionix.NutritionixException"/>
-        public NutritionixItem RetrieveItem(string id)
+        public Item RetrieveItem(string id)
         {
             CheckInitialized();
 
             var itemUri = new RetrieveItemUri(_appId, _appKey, id: id);
-            return Get<NutritionixItem>(itemUri);
+            return Get<Item>(itemUri);
         }
 
         /// <summary>
@@ -134,12 +134,12 @@ namespace Nutritionix
         /// <param name="upc">The UPC</param>
         /// <returns>The requested item or null</returns>
         /// <exception cref="Nutritionix.NutritionixException"/>
-        public NutritionixItem RetrieveItemByUPC(string upc)
+        public Item RetrieveItemByUPC(string upc)
         {
             CheckInitialized();
 
             var itemUri = new RetrieveItemUri(_appId, _appKey, upc: upc);
-            return Get<NutritionixItem>(itemUri);
+            return Get<Item>(itemUri);
         }
 
         /// <summary>
@@ -148,12 +148,12 @@ namespace Nutritionix
         /// <param name="id">The brand id</param>
         /// <returns>The requested brand or null</returns>
         /// <exception cref="Nutritionix.NutritionixException"/>
-        public NutritionixBrand RetrieveBrand(string id)
+        public Brand RetrieveBrand(string id)
         {
             CheckInitialized();
 
             var itemUri = new RetrieveBrandUri(_appId, _appKey, id);
-            return Get<NutritionixBrand>(itemUri);
+            return Get<Brand>(itemUri);
         }
 
         private TResult Get<TResult>(NutritionixUri uri) where TResult : new()
@@ -163,7 +163,7 @@ namespace Nutritionix
                 HttpResponseMessage response = MakeRequest(uri, client);
                 if(!response.IsSuccessStatusCode)
                 {
-                    var error = ReadResponse<NutritionixErrorResponse>(response);
+                    var error = ReadResponse<ErrorResponse>(response);
                     throw new NutritionixException(error);
                 }
 

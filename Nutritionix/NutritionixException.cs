@@ -19,7 +19,7 @@ namespace Nutritionix
         /// <summary>
         /// Creates a new <see cref="NutritionixException"/> from a error response
         /// </summary>
-        internal NutritionixException(NutritionixErrorResponse response)
+        internal NutritionixException(ErrorResponse response)
             : base("The Nutritionix API returned an error response.")
         {
             if(response != null)
@@ -31,6 +31,6 @@ namespace Nutritionix
         /// <summary>
         /// The errors returned from the Nutritionix API
         /// </summary>
-        public NutritionixError[] Errors { get; set; }
+        public Error[] Errors { get; set; }
     }
 }

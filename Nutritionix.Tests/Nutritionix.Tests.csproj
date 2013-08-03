@@ -55,7 +55,7 @@
   <ItemGroup>
     <Compile Include="FakeHttpMessageHandler.cs" />
     <Compile Include="NutritionixClientFixture.cs" />
-    <Compile Include="NutritionixSearchResultFieldCollectionFixture.cs" />
+    <Compile Include="SearchResultFieldCollectionFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RetrieveBrandUriFixture.cs" />
     <Compile Include="RetrieveItemUriFixture.cs" />

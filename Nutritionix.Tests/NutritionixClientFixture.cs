@@ -23,7 +23,7 @@ namespace Nutritionix.Tests
         [Test]
         public void Search_ReturnsEmptyResults_WhenResultsIsNull()
         {
-            var sampleResponse = new NutritionixSearchResponse
+            var sampleResponse = new SearchResponse
                 {
                     TotalResults = 0,
                     Results = null
@@ -31,8 +31,8 @@ namespace Nutritionix.Tests
             string json = JsonConvert.SerializeObject(sampleResponse);
             MockResponse(json);
 
-            var request = new NutritionixSearchRequest { Query = "foobar" };
-            NutritionixSearchResponse response = _nutritionix.SearchItems(request);
+            var request = new SearchRequest { Query = "foobar" };
+            SearchResponse response = _nutritionix.SearchItems(request);
 
             Assert.IsNotNull(response.Results);
             Assert.AreEqual(0, response.Results.Length);
@@ -41,16 +41,16 @@ namespace Nutritionix.Tests
         [Test]
         public void Search_ReturnsPopulatedResults()
         {
-            var sampleResponse = new NutritionixSearchResponse
+            var sampleResponse = new SearchResponse
                 {
                     TotalResults = 1,
-                    Results = new[] { new NutritionixSearchResult() }
+                    Results = new[] { new SearchResult() }
                 };
             string json = JsonConvert.SerializeObject(sampleResponse);
             MockResponse(json);
 
-            var request = new NutritionixSearchRequest { Query = "foobar" };
-            NutritionixSearchResponse response = _nutritionix.SearchItems(request);
+            var request = new SearchRequest { Query = "foobar" };
+            SearchResponse response = _nutritionix.SearchItems(request);
 
             Assert.AreEqual(1, response.Results.Length);
         }
@@ -61,7 +61,7 @@ namespace Nutritionix.Tests
         {
             MockResponse("<!_foobar'd");
 
-            var request = new NutritionixSearchRequest{Query = "foobar"};
+            var request = new SearchRequest{Query = "foobar"};
             _nutritionix.SearchItems(request);
         }
 
@@ -71,8 +71,8 @@ namespace Nutritionix.Tests
         {
             MockResponse(string.Empty, HttpStatusCode.BadRequest);
 
-            var request = new NutritionixSearchRequest { Query = "foobar" };
-            NutritionixSearchResponse response = _nutritionix.SearchItems(request);
+            var request = new SearchRequest { Query = "foobar" };
+            SearchResponse response = _nutritionix.SearchItems(request);
 
             Assert.AreEqual(0, response.Results.Length);
         }
@@ -81,14 +81,14 @@ namespace Nutritionix.Tests
         [ExpectedException(typeof(NutritionixException))]
         public void Search_ThrowsNutritionixException_WhenNutritionixReturnsErrorResponse()
         {
-            var errorResponse = new NutritionixErrorResponse
+            var errorResponse = new ErrorResponse
                 {
-                    Errors = new[] {new NutritionixError {Code = "404", Message = "No item found with id fake"}}
+                    Errors = new[] {new Error {Code = "404", Message = "No item found with id fake"}}
                 };
             var json = JsonConvert.SerializeObject(errorResponse);
             MockResponse(json, HttpStatusCode.NotFound);
 
-            var request = new NutritionixSearchRequest { Query = "foobar" };
+            var request = new SearchRequest { Query = "foobar" };
             _nutritionix.SearchItems(request);
         }
 
