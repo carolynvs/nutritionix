@@ -26,7 +26,7 @@ namespace Nutritionix
         /// The highest score in the results
         /// </summary>
         [JsonProperty("max_score")]
-        public double MaxScore { get; set; }
+        public double? MaxScore { get; set; }
 
         /// <summary>
         /// A page of matching results

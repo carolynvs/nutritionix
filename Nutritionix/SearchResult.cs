@@ -30,7 +30,7 @@ namespace Nutritionix
         /// Search score
         /// </summary>
         [JsonProperty("_score")]
-        public double Score { get; set; }
+        public double? Score { get; set; }
 
         /// <summary>
         /// Matching item
