@@ -2,6 +2,7 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Web;
 using Newtonsoft.Json;
 using Nutritionix.Uris;
 
@@ -191,13 +192,10 @@ namespace Nutritionix
             using(var client = CreateHttpClient())
             {
                 HttpResponseMessage response = Get(uri, client);
-                if(!response.IsSuccessStatusCode)
-                {
-                    var error = ReadResponse<ErrorResponse>(response);
-                    throw new NutritionixException(error);
-                }
+                if(response.IsSuccessStatusCode)
+                    return ReadResponse<TResult>(response);
 
-                return ReadResponse<TResult>(response);
+                throw CreateExceptionFromResponse(response);
             }
         }
 
@@ -207,14 +205,20 @@ namespace Nutritionix
             {
                 string json = JsonConvert.SerializeObject(request, new JsonSerializerSettings{NullValueHandling = NullValueHandling.Ignore});
                 HttpResponseMessage response = Post(uri, client, json);
-                if (!response.IsSuccessStatusCode)
-                {
-                    var error = ReadResponse<ErrorResponse>(response);
-                    throw new NutritionixException(error);
-                }
+                if(response.IsSuccessStatusCode)
+                    return ReadResponse<TResult>(response);
 
-                return ReadResponse<TResult>(response);
+                throw CreateExceptionFromResponse(response);
             }
+        }
+
+        private static Exception CreateExceptionFromResponse(HttpResponseMessage response)
+        {
+            var error = ReadResponse<ErrorResponse>(response);
+            if (error != null && error.Errors != null)
+                return new NutritionixException(error);
+
+            return new HttpException((int)response.StatusCode, response.ReasonPhrase);
         }
 
         private static HttpResponseMessage Get(NutritionixUri uri, HttpClient client)

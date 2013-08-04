@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Allergen.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Brand.cs" />
     <Compile Include="NutritionixClient.cs" />

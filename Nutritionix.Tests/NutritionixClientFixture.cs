@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http;
+using System.Web;
 using NUnit.Framework;
 using Newtonsoft.Json;
 using Rhino.Mocks;
@@ -83,7 +84,7 @@ namespace Nutritionix.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(NutritionixException))]
+        [ExpectedException(typeof(HttpException))]
         public void Search_ThrowsNutritionixException_WhenBadResponseisReturned()
         {
             MockResponse(string.Empty, HttpStatusCode.BadRequest);

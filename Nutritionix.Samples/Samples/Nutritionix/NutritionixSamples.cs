@@ -1,12 +1,19 @@
 ﻿using System;
+using System.Configuration;
 
 namespace Nutritionix.Samples
 {
     public static class NutritionixSamples
     {
-		// TODO: Update with your Nutritionix API ID and Key
-        private const string myApiId = "api_id";
-        private const string myApiKey = "api_key";
+        static NutritionixSamples()
+        {
+            // TODO: Replace with your Nutritionix API ID and Key
+            AppId = ConfigurationManager.AppSettings["appId"];
+            AppKey = ConfigurationManager.AppSettings["appKey"];
+        }
+
+        private static readonly string AppId;
+        private static readonly string AppKey;
 
         public static void RunAll()
         {
@@ -21,7 +28,7 @@ namespace Nutritionix.Samples
         public static void SearchItems()
         {
             var nutritionix = new NutritionixClient();
-            nutritionix.Initialize(myApiId, myApiKey);
+            nutritionix.Initialize(AppId, AppKey);
 
             var request = new SearchRequest { Query = "pie" };
 			Console.WriteLine("Searching Nutritionix for 'pie'...");
@@ -39,9 +46,14 @@ namespace Nutritionix.Samples
         public static void PowerSearchItems()
         {
             var nutritionix = new NutritionixClient();
-            nutritionix.Initialize(myApiId, myApiKey);
+            nutritionix.Initialize(AppId, AppKey);
 
-            var request = new PowerSearchRequest { Query = "pie" };
+            var request = new PowerSearchRequest
+            {
+                Query = "cookie",
+                SortBy = new SearchResultSort(x => x.NutritionFact_Calories)
+            };
+            
             Console.WriteLine("Power Searching Nutritionix for 'pie'...");
             SearchResponse response = nutritionix.SearchItems(request);
 
@@ -57,7 +69,7 @@ namespace Nutritionix.Samples
         public static void RetrieveItem()
         {
             var nutritionix = new NutritionixClient();
-            nutritionix.Initialize(myApiId, myApiKey);
+            nutritionix.Initialize(AppId, AppKey);
 
             Console.WriteLine("Retrieving 'Raspberry Pie' from Nutritionix...");
             Item item = nutritionix.RetrieveItem("513fc995927da70408002d76");
@@ -75,7 +87,7 @@ namespace Nutritionix.Samples
         public static void RetrieveItemByUPC()
         {
             var nutritionix = new NutritionixClient();
-            nutritionix.Initialize(myApiId, myApiKey);
+            nutritionix.Initialize(AppId, AppKey);
 
             const string upc = "029000071087";
             Console.WriteLine("Looking up UPC code: {0}...", upc);
@@ -94,7 +106,7 @@ namespace Nutritionix.Samples
         public static void RetrieveBrand()
         {
             var nutritionix = new NutritionixClient();
-            nutritionix.Initialize(myApiId, myApiKey);
+            nutritionix.Initialize(AppId, AppKey);
 
             Console.WriteLine("Retrieving 'Taco Bell' from Nutritionix...");
             Brand brand = nutritionix.RetrieveBrand("513fbc1283aa2dc80c000020");
@@ -111,7 +123,7 @@ namespace Nutritionix.Samples
         public static void RetrieveItemsByBrand()
         {
             var nutritionix = new NutritionixClient();
-            nutritionix.Initialize(myApiId, myApiKey);
+            nutritionix.Initialize(AppId, AppKey);
 
             var request = new SearchRequest { BrandId = "513fbc1283aa2dc80c000024" };
             Console.WriteLine("Searching Nutritionix for the Olive Garden brand...");

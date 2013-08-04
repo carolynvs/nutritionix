@@ -10,10 +10,10 @@ namespace Nutritionix.Tests
         {
             var fields = new SearchResultFieldCollection
             {
-                x => x.Id
+                x => x.NutritionFact_Calories
             };
 
-            CollectionAssert.Contains(fields, "item_id");
+            CollectionAssert.Contains(fields, "nf_calories");
         }
 
         [Test]
