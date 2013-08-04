@@ -52,9 +52,13 @@ namespace Nutritionix
         private Item _item;
 
         [JsonProperty("fields")]
+#pragma warning disable 649
         private Item _fields;
+#pragma warning restore 649
 
         [JsonProperty("_source")]
+#pragma warning disable 649
         private Item _source;
+#pragma warning restore 649
     }
 }

@@ -6,15 +6,24 @@ namespace Nutritionix.Tests
     public class SearchResultFieldCollectionFixture
     {
         [Test]
-        public void GetNames()
+        public void Initialize()
         {
             var fields = new SearchResultFieldCollection
-                {
-                    x => x.Id
-                };
+            {
+                x => x.Id
+            };
 
-            var result = fields.GetNames();
-            Assert.AreEqual(new[] {"item_id"}, result);
+            CollectionAssert.Contains(fields, "item_id");
+        }
+
+        [Test]
+        public void Add()
+        {
+            var fields = new SearchResultFieldCollection();
+
+            fields.Add(x => x.Name);
+
+            CollectionAssert.Contains(fields, "item_name");
         }
     }
 }

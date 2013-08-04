@@ -11,6 +11,7 @@ namespace Nutritionix.Samples
         public static void RunAll()
         {
             SearchItems();
+            PowerSearchItems();
 			RetrieveItem();
             RetrieveItemByUPC();
             RetrieveBrand();
@@ -33,6 +34,24 @@ namespace Nutritionix.Samples
             }
 
 			Console.WriteLine();
+        }
+
+        public static void PowerSearchItems()
+        {
+            var nutritionix = new NutritionixClient();
+            nutritionix.Initialize(myApiId, myApiKey);
+
+            var request = new PowerSearchRequest { Query = "pie" };
+            Console.WriteLine("Power Searching Nutritionix for 'pie'...");
+            SearchResponse response = nutritionix.SearchItems(request);
+
+            Console.WriteLine("Displaying results 1 - {0} of {1}", response.Results.Length, response.TotalResults);
+            foreach (SearchResult result in response.Results)
+            {
+                Console.WriteLine("* {0}", result.Item.Name);
+            }
+
+            Console.WriteLine();
         }
 
         public static void RetrieveItem()

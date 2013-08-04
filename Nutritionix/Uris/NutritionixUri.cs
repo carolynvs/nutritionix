@@ -16,10 +16,13 @@ namespace Nutritionix.Uris
         private readonly string _appId;
         private readonly string _appKey;
 
+        protected bool IncludeQueryString { get; set; }
+
         protected NutritionixUri(string appId, string appKey)
         {
             _appId = appId;
             _appKey = appKey;
+            IncludeQueryString = true;
         }
 
         protected abstract string RelativePath { get; }
@@ -57,8 +60,14 @@ namespace Nutritionix.Uris
 
         public override string ToString()
         {
-            var queryString = BuildQueryString();
-            return string.Format("{0}{1}?{2}", RootPath, RelativePath, queryString);
+            if(IncludeQueryString)
+            {
+                var queryString = BuildQueryString();
+
+                return string.Format("{0}{1}?{2}", RootPath, RelativePath, queryString);
+            }
+
+            return string.Format("{0}{1}", RootPath, RelativePath);
         }
     }
 }

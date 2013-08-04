@@ -1,8 +1,4 @@
-using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using Newtonsoft.Json;
 
 namespace Nutritionix
 {
@@ -71,31 +67,5 @@ namespace Nutritionix
         /// Only return items with at most this many calories
         /// </summary>
         public int? MaximumCalories { get; set; }
-    }
-
-    /// <summary>
-    /// Collection of <see cref="SearchResult"/> properties that should be populated in a search's results
-    /// </summary>
-    public class SearchResultFieldCollection : List<Expression<Func<Item, object>>>
-    {
-        /// <summary>
-        /// Returns the json properties represented by the collection
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<string> GetNames()
-        {
-            foreach(Expression<Func<Item, object>> field in this)
-            {
-                var propertyExpression = field.Body as MemberExpression;
-                if(propertyExpression == null)
-                    continue;
-
-                var jsonName = propertyExpression.Member.GetCustomAttributes(true).OfType<JsonPropertyAttribute>().FirstOrDefault();
-                if(jsonName == null)
-                    continue;
-
-                yield return jsonName.PropertyName;
-            }
-        }
     }
 }

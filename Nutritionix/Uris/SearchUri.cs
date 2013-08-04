@@ -56,7 +56,7 @@ namespace Nutritionix.Uris
             }
             else if(_request.Fields != null && _request.Fields.Any())
             {
-                queryString.Add(FieldsParam, string.Join(",", _request.Fields.GetNames()));   
+                queryString.Add(FieldsParam, string.Join(",", _request.Fields));   
             }
 
             if(_request.MinimumCalories != null)

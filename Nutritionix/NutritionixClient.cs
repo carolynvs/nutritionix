@@ -1,5 +1,7 @@
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using Newtonsoft.Json;
 using Nutritionix.Uris;
 
@@ -24,6 +26,14 @@ namespace Nutritionix
         /// <returns>The search response from the Nutritionix API.</returns>
         /// <exception cref="Nutritionix.NutritionixException"/>
         SearchResponse SearchItems(SearchRequest request);
+
+        /// <summary>
+        /// Searches Nutritionix for items matching the specified query.
+        /// </summary>
+        /// <param name="request">The query.</param>
+        /// <returns>The search response from the Nutritionix API.</returns>
+        /// <exception cref="Nutritionix.NutritionixException"/>
+        SearchResponse SearchItems(PowerSearchRequest request);
 
         /// <summary>
         /// Retrieves the specified item from Nutritionix
@@ -115,6 +125,26 @@ namespace Nutritionix
         }
 
         /// <summary>
+        /// Searches Nutritionix for items matching the specified query.
+        /// </summary>
+        /// <param name="request">The query.</param>
+        /// <returns>The search response from the Nutritionix API.</returns>
+        /// <exception cref="Nutritionix.NutritionixException"/>
+        public SearchResponse SearchItems(PowerSearchRequest request)
+        {
+            CheckInitialized();
+
+            var searchUri = new PowerSearchUri(_appId, _appKey);
+            request.AppId = _appId;
+            request.AppKey = _appKey;
+            var response = Post<PowerSearchRequest, SearchResponse>(searchUri, request);
+
+            response.Results = response.Results ?? new SearchResult[0];
+
+            return response;
+        }
+
+        /// <summary>
         /// Retrieves the specified item from the Nutritionix API
         /// </summary>
         /// <param name="id">The item id</param>
@@ -160,7 +190,7 @@ namespace Nutritionix
         {
             using(var client = CreateHttpClient())
             {
-                HttpResponseMessage response = MakeRequest(uri, client);
+                HttpResponseMessage response = Get(uri, client);
                 if(!response.IsSuccessStatusCode)
                 {
                     var error = ReadResponse<ErrorResponse>(response);
@@ -171,11 +201,42 @@ namespace Nutritionix
             }
         }
 
-        private static HttpResponseMessage MakeRequest(NutritionixUri uri, HttpClient client)
+        private TResult Post<TRequest, TResult>(NutritionixUri uri, TRequest request) where TResult : new()
+        {
+            using (var client = CreateHttpClient())
+            {
+                string json = JsonConvert.SerializeObject(request, new JsonSerializerSettings{NullValueHandling = NullValueHandling.Ignore});
+                HttpResponseMessage response = Post(uri, client, json);
+                if (!response.IsSuccessStatusCode)
+                {
+                    var error = ReadResponse<ErrorResponse>(response);
+                    throw new NutritionixException(error);
+                }
+
+                return ReadResponse<TResult>(response);
+            }
+        }
+
+        private static HttpResponseMessage Get(NutritionixUri uri, HttpClient client)
         {
             try
             {
                 return client.GetAsync(uri.ToString()).Result;
+            }
+            catch
+            {
+                string error = string.Format("An error occurred sending a request to the Nutritionix API. Uri: {0}", uri);
+                throw new NutritionixException(error);
+            }
+        }
+
+        private static HttpResponseMessage Post(NutritionixUri uri, HttpClient client, string json)
+        {
+            try
+            {
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpContent content = new StringContent(json, new UTF8Encoding(), "application/json");
+                return client.PostAsync(uri.ToString(), content).Result;
             }
             catch
             {
