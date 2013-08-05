@@ -80,6 +80,7 @@
     <Compile Include="NutritionixException.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="PowerSearchRequest.cs" />
+    <Compile Include="SearchFilter.cs" />
     <Compile Include="SearchRequest.cs" />
     <Compile Include="SearchResponse.cs" />
     <Compile Include="SearchResult.cs" />

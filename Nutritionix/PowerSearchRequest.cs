@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
@@ -68,11 +69,15 @@ namespace Nutritionix
         /// </summary>
         [JsonProperty("sort")]
         public SearchResultSort SortBy { get; set; }
-    }
+
+        [JsonProperty("filters")]
+        public SearchFilterCollection Filters { get; set; }
+    }    
 
     /// <summary>
     /// Specifies how search results should be sorted
     /// </summary>
+    [JsonObject]
     public class SearchResultSort
     {
         /// <summary>
