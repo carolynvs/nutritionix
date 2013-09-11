@@ -15,6 +15,9 @@ namespace Nutritionix
         [JsonProperty("item_id")]
         public string Id { get; set; }
 
+        [JsonProperty("item_type")]
+        public ItemType ItemType { get; set; }
+
         /// <summary>
         /// Name of the item
         /// </summary>

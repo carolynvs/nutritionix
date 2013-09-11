@@ -70,8 +70,11 @@ namespace Nutritionix
         [JsonProperty("sort")]
         public SearchResultSort SortBy { get; set; }
 
+        /// <summary>
+        /// Filters applied to the search
+        /// </summary>
         [JsonProperty("filters")]
-        public SearchFilterCollection Filters { get; set; }
+        public List<ISearchFilter> Filters { get; set; }
     }    
 
     /// <summary>

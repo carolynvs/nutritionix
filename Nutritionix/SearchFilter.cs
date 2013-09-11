@@ -8,39 +8,65 @@ using Nutritionix.Extensions;
 namespace Nutritionix
 {
     [JsonObject]
-    public class SearchFilterCollection : List<ISearchFilter>
-    {
-
-    }
-
-    [JsonObject]
     public interface ISearchFilter
     {
 
     }
 
-    [JsonObject]
-    public class NegatedSearchFilter : ISearchFilter
-    {
-        public ISearchFilter Filter { get; set; }
-    }
-
-    [JsonObject]
+    [JsonObject, JsonConverter(typeof(ItemTypeFilterConverter))]
     public class ItemTypeFilter : ISearchFilter
     {
-        [JsonProperty("item_type")]
-        public ItemType Type { get; set; }
+        public ItemType ItemType { get; set; }
+
+        /// <summary>
+        /// Exclude the specified ItemType
+        /// </summary>
+        public bool Negated { get; set; }
     }
 
-    [JsonConverter(typeof(RangeSearchFilterConverter))]
-    public class RangeSearchFilter : ISearchFilter
+    public class ItemTypeFilterConverter : JsonConverter
     {
-        public RangeSearchFilter()
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            var filter = (ItemTypeFilter) value;
+
+            if (filter.Negated)
+            {
+                writer.WriteStartObject();
+                writer.WritePropertyName("not");
+            }
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("item_type");
+            writer.WriteValue((int)filter.ItemType);
+            writer.WriteEndObject();
+
+            if (filter.Negated)
+            {
+                writer.WriteEndObject();
+            }
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof (ItemTypeFilter);
+        }
+    }
+
+    [JsonObject, JsonConverter(typeof(RangeFilterConverter))]
+    public class RangeFilter : ISearchFilter
+    {
+        public RangeFilter()
         {
             
         }
 
-        public RangeSearchFilter(Expression<Func<Item, decimal?>> itemPropertyExpression)
+        public RangeFilter(Expression<Func<Item, decimal?>> itemPropertyExpression)
         {
             Field = itemPropertyExpression.ToJsonProperty();
         }
@@ -52,17 +78,19 @@ namespace Nutritionix
         public decimal To { get; set; }
     }
 
-    public class RangeSearchFilterConverter : JsonConverter
+    public class RangeFilterConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var filter = (RangeSearchFilter) value;
-            writer.WritePropertyName(filter.Field);
+            var filter = (RangeFilter) value;
             writer.WriteStartObject();
-            writer.WritePropertyName("from");
-            writer.WriteValue(filter.From);
-            writer.WritePropertyName("to");
-            writer.WriteValue(filter.To);
+                writer.WritePropertyName(filter.Field);
+                writer.WriteStartObject();
+                    writer.WritePropertyName("from");
+                    writer.WriteValue(filter.From);
+                    writer.WritePropertyName("to");
+                    writer.WriteValue(filter.To);
+                writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -73,19 +101,19 @@ namespace Nutritionix
 
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(RangeSearchFilter);
+            return objectType == typeof(RangeFilter);
         }
     }
 
-    [JsonConverter(typeof(ComparisonSearchFilterConverter))]
-    public class ComparisonSearchFilter : ISearchFilter
+    [JsonObject, JsonConverter(typeof(ComparisonFilterConverter))]
+    public class ComparisonFilter : ISearchFilter
     {
-        public ComparisonSearchFilter()
+        public ComparisonFilter()
         {
             
         }
 
-        public ComparisonSearchFilter(Expression<Func<Item, decimal?>> itemPropertyExpression)
+        public ComparisonFilter(Expression<Func<Item, decimal?>> itemPropertyExpression)
         {
             Field = itemPropertyExpression.ToJsonProperty();
         }
@@ -94,18 +122,20 @@ namespace Nutritionix
 
         public ComparisonOperator Operator { get; set; }
 
-        public decimal Value { get; set; }
+        public int Value { get; set; }
     }
 
-    public class ComparisonSearchFilterConverter : JsonConverter
+    public class ComparisonFilterConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var filter = (ComparisonSearchFilter) value;
-            writer.WritePropertyName(filter.Field);
+            var filter = (ComparisonFilter) value;
             writer.WriteStartObject();
-            writer.WritePropertyName(filter.Operator.ToDescription());
-            writer.WriteValue(filter.Value);
+                writer.WritePropertyName(filter.Field);
+                writer.WriteStartObject();
+                    writer.WritePropertyName(filter.Operator.ToDescription());
+                    writer.WriteValue(filter.Value);
+                writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -116,7 +146,7 @@ namespace Nutritionix
 
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(ComparisonSearchFilter);
+            return objectType == typeof(ComparisonFilter);
         }
     }
 

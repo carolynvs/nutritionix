@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 
 namespace Nutritionix.Samples
@@ -50,17 +51,22 @@ namespace Nutritionix.Samples
 
             var request = new PowerSearchRequest
             {
-                Query = "cookie",
-                SortBy = new SearchResultSort(x => x.NutritionFact_Calories)
+                Query = "starbucks AND frap*",
+                Fields = new SearchResultFieldCollection {x => x.Name, x => x.NutritionFact_Calories, x => x.ItemType},
+                SortBy = new SearchResultSort(x => x.NutritionFact_Calories, SortOrder.Descending),
+                Filters = new List<ISearchFilter>
+                {
+                    new ItemTypeFilter {Negated = true, ItemType = ItemType.Packaged}
+                }
             };
-            
-            Console.WriteLine("Power Searching Nutritionix for 'pie'...");
+
+            Console.WriteLine("Power Searching Nutritionix for: 'starbucks AND frap*' sorted by calories, not a packaged food...");
             SearchResponse response = nutritionix.SearchItems(request);
 
             Console.WriteLine("Displaying results 1 - {0} of {1}", response.Results.Length, response.TotalResults);
             foreach (SearchResult result in response.Results)
             {
-                Console.WriteLine("* {0}", result.Item.Name);
+                Console.WriteLine("* {0} ({1} calories) from the {2} database", result.Item.Name, result.Item.NutritionFact_Calories, result.Item.ItemType);
             }
 
             Console.WriteLine();

@@ -78,6 +78,8 @@
     <Compile Include="ExpressionExtensionsFixture.cs" />
     <Compile Include="FakeHttpMessageHandler.cs" />
     <Compile Include="NutritionixClientFixture.cs" />
+    <Compile Include="PowerSearchRequestFixture.cs" />
+    <Compile Include="SearchFilterCollectionFixture.cs" />
     <Compile Include="SearchResultFieldCollectionFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RetrieveBrandUriFixture.cs" />

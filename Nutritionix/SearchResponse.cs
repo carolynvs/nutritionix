@@ -19,7 +19,7 @@ namespace Nutritionix
         /// <summary>
         /// The total number of matching results
         /// </summary>
-        [JsonProperty("total_hits")]
+        [JsonProperty("total")]
         public int TotalResults { get; set; }
 
         /// <summary>
