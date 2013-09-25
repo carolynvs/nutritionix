@@ -13,6 +13,37 @@ namespace Nutritionix
 
     }
 
+    [JsonConverter(typeof(SearchFilterCollectionConverter))]
+    public class SearchFilterCollection : List<ISearchFilter>
+    {
+        
+    }
+
+    internal class SearchFilterCollectionConverter : JsonConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            var filters = (SearchFilterCollection)value;
+
+            writer.WriteStartObject();
+            foreach (ISearchFilter filter in filters)
+            {
+                serializer.Serialize(writer, filter);
+            }
+            writer.WriteEndObject();
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof (SearchFilterCollection);
+        }
+    }
+
     [JsonObject, JsonConverter(typeof(ItemTypeFilterConverter))]
     public class ItemTypeFilter : ISearchFilter
     {
@@ -24,7 +55,7 @@ namespace Nutritionix
         public bool Negated { get; set; }
     }
 
-    public class ItemTypeFilterConverter : JsonConverter
+    internal class ItemTypeFilterConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
@@ -32,15 +63,13 @@ namespace Nutritionix
 
             if (filter.Negated)
             {
-                writer.WriteStartObject();
                 writer.WritePropertyName("not");
+                writer.WriteStartObject();
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("item_type");
             writer.WriteValue((int)filter.ItemType);
-            writer.WriteEndObject();
-
+            
             if (filter.Negated)
             {
                 writer.WriteEndObject();
@@ -78,19 +107,17 @@ namespace Nutritionix
         public decimal To { get; set; }
     }
 
-    public class RangeFilterConverter : JsonConverter
+    internal class RangeFilterConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var filter = (RangeFilter) value;
+            writer.WritePropertyName(filter.Field);
             writer.WriteStartObject();
-                writer.WritePropertyName(filter.Field);
-                writer.WriteStartObject();
-                    writer.WritePropertyName("from");
-                    writer.WriteValue(filter.From);
-                    writer.WritePropertyName("to");
-                    writer.WriteValue(filter.To);
-                writer.WriteEndObject();
+                writer.WritePropertyName("from");
+                writer.WriteValue(filter.From);
+                writer.WritePropertyName("to");
+                writer.WriteValue(filter.To);
             writer.WriteEndObject();
         }
 
@@ -125,17 +152,16 @@ namespace Nutritionix
         public int Value { get; set; }
     }
 
-    public class ComparisonFilterConverter : JsonConverter
+    internal class ComparisonFilterConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var filter = (ComparisonFilter) value;
+
+            writer.WritePropertyName(filter.Field);
             writer.WriteStartObject();
-                writer.WritePropertyName(filter.Field);
-                writer.WriteStartObject();
-                    writer.WritePropertyName(filter.Operator.ToDescription());
-                    writer.WriteValue(filter.Value);
-                writer.WriteEndObject();
+                writer.WritePropertyName(filter.Operator.ToDescription());
+                writer.WriteValue(filter.Value);
             writer.WriteEndObject();
         }
 

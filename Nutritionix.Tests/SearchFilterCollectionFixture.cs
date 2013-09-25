@@ -10,7 +10,7 @@ namespace Nutritionix.Tests
         [Test]
         public void Serialize_ItemTypeFilter()
         {
-            var filters = new List<ISearchFilter>()
+            var filters = new SearchFilterCollection
             {
                 new ItemTypeFilter{ItemType = ItemType.Restaurant}
             };
@@ -23,7 +23,7 @@ namespace Nutritionix.Tests
         [Test]
         public void Serialize_NotItemTypeFilter()
         {
-            var filters = new List<ISearchFilter>()
+            var filters = new SearchFilterCollection
             {
                 new ItemTypeFilter{ItemType = ItemType.USDA, Negated = true}
             };
@@ -36,7 +36,7 @@ namespace Nutritionix.Tests
         [Test]
         public void Serialize_RangeFilter()
         {
-            var filters = new List<ISearchFilter>()
+            var filters = new SearchFilterCollection
             {
                 new RangeFilter(x => x.NutritionFact_Calories){ From = 100, To = 200}
             };
@@ -52,7 +52,7 @@ namespace Nutritionix.Tests
         [TestCase(ComparisonOperator.LessThanOrEqualTo, "{\"nf_calories\":{\"lte\":100}}")]
         public void Serialize_ComparisionFilter(ComparisonOperator op, string expectedJson)
         {
-            var filters = new List<ISearchFilter>()
+            var filters = new SearchFilterCollection
             {
                 new ComparisonFilter(x => x.NutritionFact_Calories){Operator = op, Value = 100}
             };

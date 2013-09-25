@@ -54,7 +54,7 @@ namespace Nutritionix.Samples
                 Query = "starbucks AND frap*",
                 Fields = new SearchResultFieldCollection {x => x.Name, x => x.NutritionFact_Calories, x => x.ItemType},
                 SortBy = new SearchResultSort(x => x.NutritionFact_Calories, SortOrder.Descending),
-                Filters = new List<ISearchFilter>
+                Filters = new SearchFilterCollection
                 {
                     new ItemTypeFilter {Negated = true, ItemType = ItemType.Packaged}
                 }

@@ -22,7 +22,7 @@ namespace Nutritionix.Tests
         {
             var request = new PowerSearchRequest
             {
-                Filters = new List<ISearchFilter>
+                Filters = new SearchFilterCollection
                 {
                     new ItemTypeFilter {ItemType = ItemType.Restaurant},
                     new ComparisonFilter(x => x.NutritionFact_Calories){Operator = ComparisonOperator.LessThan, Value = 100}
@@ -31,7 +31,7 @@ namespace Nutritionix.Tests
 
             string json = JsonConvert.SerializeObject(request);
 
-            StringAssert.Contains("\"filters\":{\"item_type\":1,\"nf_calories\":{\"le\":100}}", json);
+            StringAssert.Contains("\"filters\":{\"item_type\":1,\"nf_calories\":{\"lt\":100}}", json);
         }
     }
 }

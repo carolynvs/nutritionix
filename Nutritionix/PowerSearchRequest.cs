@@ -73,8 +73,8 @@ namespace Nutritionix
         /// <summary>
         /// Filters applied to the search
         /// </summary>
-        [JsonProperty("filters")]
-        public List<ISearchFilter> Filters { get; set; }
+        [JsonProperty("filters"),JsonConverter(typeof(SearchFilterCollectionConverter))]
+        public SearchFilterCollection Filters { get; set; }
     }    
 
     /// <summary>
