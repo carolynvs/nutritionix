@@ -14,6 +14,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F46FE5
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{67EB254F-7E9E-4F44-BDF1-065D8B870560}"
+	ProjectSection(SolutionItems) = preProject
+		nuget\build.bat = nuget\build.bat
+		nuget\Nutritionix.nuspec = nuget\Nutritionix.nuspec
+		nuget\Nutritionix.Samples.nuspec = nuget\Nutritionix.Samples.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
