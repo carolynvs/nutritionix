@@ -1,4 +1,4 @@
-NuGet Update -self
-NuGet Pack Nutritionix.nuspec
-NuGet Pack Nutritionix.Samples.nuspec
+..\.nuget\nuget.exe Update -self
+..\.nuget\nuget.exe Pack Nutritionix.nuspec
+..\.nuget\nuget.exe Pack Nutritionix.Samples.nuspec
 PAUSE
