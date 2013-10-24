@@ -67,6 +67,12 @@ namespace Nutritionix
         public decimal? NutritionFact_Calories { get; set; }
 
         /// <summary>
+        /// Calories from Fat (calculated)
+        /// </summary>
+        [JsonProperty("nf_calories_from_fat")]
+        public decimal? NutritionFact_CaloriesFromFat { get; set; }
+
+        /// <summary>
         /// Total Fat
         /// </summary>
         [JsonProperty("nf_total_fat")]
