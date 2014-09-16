@@ -1,5 +1,4 @@
 using System.Collections.Specialized;
-using System.Web;
 using Nutritionix.Extensions;
 
 namespace Nutritionix.Uris
@@ -29,7 +28,7 @@ namespace Nutritionix.Uris
 
         private NameValueCollection BuildQueryString()
         {
-            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            var queryString = new NameValueCollection();
             UpdateQueryString(queryString);
 
             RemoveEmptyQueryStringParameters(queryString);

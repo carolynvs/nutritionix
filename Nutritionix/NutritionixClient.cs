@@ -2,7 +2,6 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Web;
 using Newtonsoft.Json;
 using Nutritionix.Uris;
 
@@ -217,8 +216,8 @@ namespace Nutritionix
             var error = ReadResponse<ErrorResponse>(response);
             if (error != null && error.Errors != null)
                 return new NutritionixException(error);
-
-            return new HttpException((int)response.StatusCode, response.ReasonPhrase);
+            
+            return new NutritionixException(response.ReasonPhrase, response.StatusCode);
         }
 
         private static HttpResponseMessage Get(NutritionixUri uri, HttpClient client)
@@ -239,7 +238,7 @@ namespace Nutritionix
             try
             {
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpContent content = new StringContent(json, new UTF8Encoding(), "application/json");
+                HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 return client.PostAsync(uri.ToString(), content).Result;
             }
             catch

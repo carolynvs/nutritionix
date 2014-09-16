@@ -1,5 +1,6 @@
 using System.Collections.Specialized;
 using System.Linq;
+using System.Net;
 using Nutritionix.Extensions;
 
 namespace Nutritionix.Uris
@@ -30,7 +31,7 @@ namespace Nutritionix.Uris
 
         protected override string RelativePath
         {
-            get { return string.Format("search/{0}", System.Web.HttpUtility.UrlEncode(_request.Query)); }
+            get { return string.Format("search/{0}", System.Uri.EscapeDataString(_request.Query)); }
         }
 
         protected override void UpdateQueryString(NameValueCollection queryString)

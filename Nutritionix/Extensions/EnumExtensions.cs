@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Reflection;
 
 namespace Nutritionix.Extensions
@@ -24,10 +23,10 @@ namespace Nutritionix.Extensions
         }
 
         private static T GetAttribute<T>(Enum value)
-            where T : class
+            where T : Attribute
         {
             FieldInfo field = value.GetType().GetField(value.ToString());
-            return Attribute.GetCustomAttribute(field, typeof (T)) as T;
+            return field.GetCustomAttribute<T>();
         }
     }
 }

@@ -176,6 +176,16 @@ namespace Nutritionix
         }
     }
 
+    public class DescriptionAttribute : Attribute
+    {
+        public DescriptionAttribute(string value)
+        {
+            Description = value;
+        }
+
+        public readonly string Description;
+    }
+
     public enum ComparisonOperator
     {
         [Description("lt")]

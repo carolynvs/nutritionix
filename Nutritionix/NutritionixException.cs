@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 
 namespace Nutritionix
 {
@@ -11,9 +12,9 @@ namespace Nutritionix
         /// <summary>
         /// Create a new <see cref="NutritionixException"/> from an error message
         /// </summary>
-        public NutritionixException(string message) : base(message)
+        public NutritionixException(string message, HttpStatusCode status = HttpStatusCode.InternalServerError) : base(message)
         {
-            
+            Status = status;    
         }
 
         /// <summary>
@@ -27,6 +28,11 @@ namespace Nutritionix
                 Errors = response.Errors;
             }
         }
+
+        /// <summary>
+        /// An HTTP status code representing the type of error
+        /// </summary>
+        public HttpStatusCode Status { get;set; }
 
         /// <summary>
         /// The errors returned from the Nutritionix API

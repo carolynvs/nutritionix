@@ -53,12 +53,6 @@
     <Compile Include="Samples\Nutritionix\NutritionixSamples.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Nutritionix\Nutritionix.csproj">
-      <Project>{7b38f2b3-2184-4e40-a420-7b67cc267e0a}</Project>
-      <Name>Nutritionix</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
