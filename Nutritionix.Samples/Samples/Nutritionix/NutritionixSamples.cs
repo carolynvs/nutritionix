@@ -21,7 +21,7 @@ namespace Nutritionix.Samples
         {
             SearchItems();
             PowerSearchItems();
-			RetrieveItem();
+            RetrieveItem();
             RetrieveItemByUPC();
             RetrieveBrand();
             RetrieveItemsByBrand();
@@ -78,8 +78,8 @@ namespace Nutritionix.Samples
             var nutritionix = new NutritionixClient();
             nutritionix.Initialize(AppId, AppKey);
 
-            Console.WriteLine("Retrieving 'Raspberry Pie' from Nutritionix...");
-            Item item = nutritionix.RetrieveItem("513fc995927da70408002d76");
+            Console.WriteLine("Retrieving 'Derby Pie' by Id from Nutritionix...");
+            Item item = nutritionix.RetrieveItem("51c3717897c3e69de4b0ae73");
 
             Console.WriteLine("Item Id: {0}", item.Id);
             Console.WriteLine("Item Name: {0}", item.Name);
