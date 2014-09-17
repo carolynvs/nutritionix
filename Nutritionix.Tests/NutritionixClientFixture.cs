@@ -1,27 +1,24 @@
 ﻿using System.Net;
 using System.Net.Http;
-using System.Web;
-using NUnit.Framework;
 using Newtonsoft.Json;
 using Rhino.Mocks;
+using Xunit;
 
 namespace Nutritionix.Tests
 {
-    [TestFixture]
     public class NutritionixClientFixture
     {
         private FakeHttpMessageHandler _mockHttp;
         private NutritionixClient _nutritionix;
 
-        [SetUp]
-        public void Setup()
+        public NutritionixClientFixture()
         {
             _mockHttp = MockRepository.GeneratePartialMock<FakeHttpMessageHandler>();
             _nutritionix = new NutritionixClient(() => new HttpClient(_mockHttp));
             _nutritionix.Initialize("myAppId", "myAppKey");
         }
 
-        [Test]
+        [Fact]
         public void Search_ReturnsEmptyResults_WhenResultsIsNull()
         {
             var sampleResponse = new SearchResponse
@@ -35,11 +32,11 @@ namespace Nutritionix.Tests
             var request = new SearchRequest {Query = "foobar"};
             SearchResponse response = _nutritionix.SearchItems(request);
 
-            Assert.IsNotNull(response.Results);
-            Assert.AreEqual(0, response.Results.Length);
+            Assert.NotNull(response.Results);
+            Assert.Equal(0, response.Results.Length);
         }
 
-        [Test]
+        [Fact]
         public void Search_ReturnsPopulatedResults()
         {
             var sampleResponse = new SearchResponse
@@ -53,10 +50,10 @@ namespace Nutritionix.Tests
             var request = new SearchRequest {Query = "foobar"};
             SearchResponse response = _nutritionix.SearchItems(request);
 
-            Assert.AreEqual(1, response.Results.Length);
+            Assert.Equal(1, response.Results.Length);
         }
 
-        [Test]
+        [Fact]
         public void PowerSearch_ReturnsPopulatedResults()
         {
             var sampleResponse = new SearchResponse
@@ -70,33 +67,36 @@ namespace Nutritionix.Tests
             var request = new PowerSearchRequest {Query = "foobar"};
             SearchResponse response = _nutritionix.SearchItems(request);
 
-            Assert.AreEqual(1, response.Results.Length);
+            Assert.Equal(1, response.Results.Length);
         }
 
-        [Test]
-        [ExpectedException(typeof(NutritionixException))]
+        [Fact]
         public void Search_ThrowsNutritionixException_WhenResponseContainsUnparseableJson()
         {
             MockResponse("<!_foobar'd");
 
             var request = new SearchRequest {Query = "foobar"};
-            _nutritionix.SearchItems(request);
+
+            Assert.Throws<NutritionixException>(() =>
+            {
+                _nutritionix.SearchItems(request);
+            });
         }
 
-        [Test]
-        [ExpectedException(typeof(HttpException))]
-        public void Search_ThrowsNutritionixException_WhenBadResponseisReturned()
+        [Fact]
+        public void Search_ThrowsNutritionixException_WhenBadResponseIsReturned()
         {
             MockResponse(string.Empty, HttpStatusCode.BadRequest);
 
             var request = new SearchRequest {Query = "foobar"};
-            SearchResponse response = _nutritionix.SearchItems(request);
 
-            Assert.AreEqual(0, response.Results.Length);
+            Assert.Throws<NutritionixException>(() =>
+            {
+                _nutritionix.SearchItems(request);
+            });
         }
 
-        [Test]
-        [ExpectedException(typeof(NutritionixException))]
+        [Fact]
         public void Search_ThrowsNutritionixException_WhenNutritionixReturnsErrorResponse()
         {
             var errorResponse = new ErrorResponse
@@ -107,7 +107,11 @@ namespace Nutritionix.Tests
             MockResponse(json, HttpStatusCode.NotFound);
 
             var request = new SearchRequest {Query = "foobar"};
-            _nutritionix.SearchItems(request);
+
+            Assert.Throws<NutritionixException>(() =>
+            {
+                _nutritionix.SearchItems(request);
+            });
         }
 
         private void MockResponse(string json, HttpStatusCode status = HttpStatusCode.OK)

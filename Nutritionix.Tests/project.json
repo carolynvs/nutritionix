@@ -1,0 +1,15 @@
+﻿{
+    "dependencies": {
+        "Nutritionix": "",
+        "RhinoMocks": "3.6.1",
+        "System.Collections": "4.0.0.0",
+        "System.Linq.Expressions": "4.0.0.0",
+        "Xunit.KRunner": "1.0.0-alpha3"
+    },
+    "frameworks": {
+        "net45": { }
+    },
+    "commands": {
+        "test": "Xunit.KRunner"
+    }
+}

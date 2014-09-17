@@ -1,31 +1,28 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
-using NUnit.Framework;
 using Nutritionix.Extensions;
+using Xunit;
 
 namespace Nutritionix.Tests
 {
-
-    [TestFixture]
     public class ExpressionExtensionsFixture
     {
-        [Test]
+        [Fact]
         public void GetJsonProperty_ForStringProperty()
         {
             Expression<Func<Item, string>> property = x => x.Name;
             string jsonProperty = property.ToJsonProperty();
 
-            Assert.AreEqual("item_name", jsonProperty);
+            Assert.Equal("item_name", jsonProperty);
         }
 
-        [Test]
+        [Fact]
         public void GetJsonProperty_ForNullableProperty()
         {
             Expression<Func<Item, decimal?>> property = x => x.NutritionFact_Calories;
             string jsonProperty = property.ToJsonProperty();
 
-            Assert.AreEqual("nf_calories", jsonProperty);
+            Assert.Equal("nf_calories", jsonProperty);
         }
     }
 }

@@ -1,23 +1,21 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
-using NUnit.Framework;
+﻿using Newtonsoft.Json;
+using Xunit;
 
 namespace Nutritionix.Tests
 {
-    [TestFixture]
     public class PowerSearchRequestFixture
     {
-        [Test]
+        [Fact]
         public void Serialize_MinScore()
         {
             var request = new PowerSearchRequest {MinimumScore = 0.5};
 
             string json = JsonConvert.SerializeObject(request);
 
-            StringAssert.Contains("\"min_score\":0.5", json);
+            Assert.Contains("\"min_score\":0.5", json);
         }
 
-        [Test]
+        [Fact]
         public void Serialize_Filters()
         {
             var request = new PowerSearchRequest
@@ -31,7 +29,7 @@ namespace Nutritionix.Tests
 
             string json = JsonConvert.SerializeObject(request);
 
-            StringAssert.Contains("\"filters\":{\"item_type\":1,\"nf_calories\":{\"lt\":100}}", json);
+            Assert.Contains("\"filters\":{\"item_type\":1,\"nf_calories\":{\"lt\":100}}", json);
         }
     }
 }

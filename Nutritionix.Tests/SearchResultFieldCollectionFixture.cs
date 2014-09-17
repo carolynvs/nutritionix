@@ -1,11 +1,10 @@
-using NUnit.Framework;
+using Xunit;
 
 namespace Nutritionix.Tests
 {
-    [TestFixture]
     public class SearchResultFieldCollectionFixture
     {
-        [Test]
+        [Fact]
         public void Initialize()
         {
             var fields = new SearchResultFieldCollection
@@ -13,17 +12,17 @@ namespace Nutritionix.Tests
                 x => x.NutritionFact_Calories
             };
 
-            CollectionAssert.Contains(fields, "nf_calories");
+            Assert.True(fields.Contains("nf_calories"));
         }
 
-        [Test]
+        [Fact]
         public void Add()
         {
             var fields = new SearchResultFieldCollection();
 
             fields.Add(x => x.Name);
 
-            CollectionAssert.Contains(fields, "item_name");
+            Assert.True(fields.Contains("item_name"));
         }
     }
 }

@@ -1,36 +1,35 @@
-﻿using NUnit.Framework;
-using Nutritionix.Uris;
+﻿using Nutritionix.Uris;
+using Xunit;
 
 namespace Nutritionix.Tests
 {
-    [TestFixture]
     public class RetrieveBrandUriFixture
     {
-        [Test]
+        [Fact]
         public void ToString_ContainsAppId()
         {
             var uri = new RetrieveBrandUri("myId", "myKey", "itemId");
             var result = uri.ToString();
 
-            Assert.IsTrue(result.Contains("appId=myId"));
+            Assert.True(result.Contains("appId=myId"));
         }
 
-        [Test]
+        [Fact]
         public void ToString_ContainsAppKey()
         {
             var uri = new RetrieveBrandUri("myId", "myKey", "itemId");
             var result = uri.ToString();
 
-            Assert.IsTrue(result.Contains("appKey=myKey"));
+            Assert.True(result.Contains("appKey=myKey"));
         }
 
-        [Test]
+        [Fact]
         public void ToString_ContainsBrandId()
         {
             var uri = new RetrieveBrandUri("myId", "myKey", "brandId");
             var result = uri.ToString();
 
-            Assert.IsTrue(result.Contains("brand/brandId"));
+            Assert.True(result.Contains("brand/brandId"));
         }
     }
 }

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22013.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutritionix.Tests", "Nutritionix.Tests\Nutritionix.Tests.csproj", "{291324C5-BEF3-467C-8B88-E8B2070C10FF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F46FE583-2CBB-454B-85D0-940E1D960D79}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -23,16 +21,14 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nutritionix", "Nutritionix\
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nutritionix.Samples", "Nutritionix.Samples\Nutritionix.Samples.kproj", "{3FACBCA2-B435-4E80-8FB4-AC398811A03F}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nutritionix.Tests", "Nutritionix.Tests\Nutritionix.Tests.kproj", "{BA85BB85-FA0B-4448-B80E-70E3E43C7FFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{291324C5-BEF3-467C-8B88-E8B2070C10FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{291324C5-BEF3-467C-8B88-E8B2070C10FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{291324C5-BEF3-467C-8B88-E8B2070C10FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{291324C5-BEF3-467C-8B88-E8B2070C10FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F60B1D5A-F2ED-437B-90D9-A8359ADA9C21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F60B1D5A-F2ED-437B-90D9-A8359ADA9C21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F60B1D5A-F2ED-437B-90D9-A8359ADA9C21}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,6 +37,10 @@ Global
 		{3FACBCA2-B435-4E80-8FB4-AC398811A03F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FACBCA2-B435-4E80-8FB4-AC398811A03F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FACBCA2-B435-4E80-8FB4-AC398811A03F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA85BB85-FA0B-4448-B80E-70E3E43C7FFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA85BB85-FA0B-4448-B80E-70E3E43C7FFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA85BB85-FA0B-4448-B80E-70E3E43C7FFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA85BB85-FA0B-4448-B80E-70E3E43C7FFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
