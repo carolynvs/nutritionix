@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using Microsoft.Framework.ConfigurationModel;
+using System;
 
 namespace Nutritionix.Samples
 {
@@ -9,8 +8,10 @@ namespace Nutritionix.Samples
         static NutritionixSamples()
         {
             // TODO: Replace with your Nutritionix API ID and Key
-            AppId = ConfigurationManager.AppSettings["appId"];
-            AppKey = ConfigurationManager.AppSettings["appKey"];
+            var appConfig = new Configuration();
+            appConfig.AddJsonFile("config.json");
+            AppId = appConfig.Get("appId");
+            AppKey = appConfig.Get("appKey");
         }
 
         private static readonly string AppId;
