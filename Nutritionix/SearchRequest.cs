@@ -25,7 +25,7 @@ namespace Nutritionix
         /// <summary>
         /// A search term
         /// </summary>
-        public string Query { get; set; }
+        public string Query { get; set; } = string.Empty;
 
         /// <summary>
         /// A brand ID

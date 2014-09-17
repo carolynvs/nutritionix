@@ -8,21 +8,18 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
   </PropertyGroup>
-
   <Import Project="$(VSToolsPath)\AspNet\Microsoft.Web.AspNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>f60b1d5a-f2ed-437b-90d9-a8359ada9c21</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Nutritionix2</RootNamespace>
+    <RootNamespace>Nutritionix</RootNamespace>
   </PropertyGroup>
-
   <PropertyGroup Condition="$(OutputType) == 'Console'">
     <DebuggerFlavor>ConsoleDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="$(OutputType) == 'Web'">
     <DebuggerFlavor>WebDebugger</DebuggerFlavor>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" Label="Configuration">
   </PropertyGroup>
   <PropertyGroup>

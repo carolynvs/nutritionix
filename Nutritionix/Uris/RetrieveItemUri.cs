@@ -1,4 +1,3 @@
-using System.Collections.Specialized;
 using Nutritionix.Extensions;
 
 namespace Nutritionix.Uris
@@ -22,7 +21,7 @@ namespace Nutritionix.Uris
             get { return "item"; }
         }
 
-        protected override void UpdateQueryString(NameValueCollection queryString)
+        protected override void UpdateQueryString(QueryString queryString)
         {
             base.UpdateQueryString(queryString);
 

@@ -1,6 +1,3 @@
-using System.Collections.Specialized;
-using Nutritionix.Extensions;
-
 namespace Nutritionix.Uris
 {
     /// <summary>
@@ -26,40 +23,24 @@ namespace Nutritionix.Uris
 
         protected abstract string RelativePath { get; }
 
-        private NameValueCollection BuildQueryString()
+        private QueryString BuildQueryString()
         {
-            var queryString = new NameValueCollection();
+            var queryString = new QueryString();
             UpdateQueryString(queryString);
-
-            RemoveEmptyQueryStringParameters(queryString);
-
             queryString.Add(AppIdParam, _appId);
             queryString.Add(AppKeyParam, _appKey);
 
             return queryString;
         }
 
-        private static void RemoveEmptyQueryStringParameters(NameValueCollection queryString)
+        protected virtual void UpdateQueryString(QueryString queryString)
         {
-            for(int i = queryString.Count-1; i >= 0; i--)
-            {
-                string key = queryString.GetKey(i);
-                string value = queryString[key];
-                if(value.IsNullOrEmpty())
-                {
-                    queryString.Remove(key);
-                }
-            }
-        }
 
-        protected virtual void UpdateQueryString(NameValueCollection queryString)
-        {
-            
         }
 
         public override string ToString()
         {
-            if(IncludeQueryString)
+            if (IncludeQueryString)
             {
                 var queryString = BuildQueryString();
 
