@@ -8,6 +8,6 @@
         "aspnet50": { }
     },
     "commands": {
-        "test": "Xunit.KRunner"
+        "test": "xunit.runner.kre"
     }
 }
