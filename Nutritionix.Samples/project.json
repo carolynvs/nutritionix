@@ -1,9 +1,9 @@
 ﻿{
     "dependencies": {
         "Nutritionix": "",
-        "Microsoft.Framework.ConfigurationModel.Json": "1.0.0-alpha3"
+        "Microsoft.Framework.ConfigurationModel.Json": "1.0.0-rc1-*"
     },
     "frameworks": {
-        "net45": { }
+        "aspnet50": { }
     }
 }
