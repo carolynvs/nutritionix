@@ -51,8 +51,8 @@ namespace Nutritionix.Samples
 
             var request = new PowerSearchRequest
             {
-                Query = "starbucks AND frap*",
-                Fields = new SearchResultFieldCollection {x => x.Name, x => x.NutritionFact_Calories, x => x.ItemType},
+                Queries = new QueryFilterCollection { new QueryFilter(x => x.Name, "frap*"), new QueryFilter(x => x.BrandName, "Starbucks") },
+                Fields = new SearchResultFieldCollection {x => x.Name, x => x.BrandName, x => x.NutritionFact_Calories, x => x.ItemType},
                 SortBy = new SearchResultSort(x => x.NutritionFact_Calories, SortOrder.Descending),
                 Filters = new SearchFilterCollection
                 {
@@ -60,13 +60,13 @@ namespace Nutritionix.Samples
                 }
             };
 
-            Console.WriteLine("Power Searching Nutritionix for: 'starbucks AND frap*' sorted by calories, not a packaged food...");
+            Console.WriteLine("Power Searching Nutritionix for: Item Name: 'frap*' and Brand Name: 'Starbucks' sorted by calories, not a packaged food...");
             SearchResponse response = nutritionix.SearchItems(request);
 
             Console.WriteLine("Displaying results 1 - {0} of {1}", response.Results.Length, response.TotalResults);
             foreach (SearchResult result in response.Results)
             {
-                Console.WriteLine("* {0} ({1} calories) from the {2} database", result.Item.Name, result.Item.NutritionFact_Calories, result.Item.ItemType);
+                Console.WriteLine("* {0} {1} ({2} calories) from the {3} database", result.Item.BrandName, result.Item.Name, result.Item.NutritionFact_Calories, result.Item.ItemType);
             }
 
             Console.WriteLine();
@@ -78,7 +78,7 @@ namespace Nutritionix.Samples
             nutritionix.Initialize(AppId, AppKey);
 
             Console.WriteLine("Retrieving 'Raspberry Pie' from Nutritionix...");
-            Item item = nutritionix.RetrieveItem("513fc995927da70408002d76");
+            Item item = nutritionix.RetrieveItem("56dfd0652c93fba9556c02e7");
 
             Console.WriteLine("Item Id: {0}", item.Id);
             Console.WriteLine("Item Name: {0}", item.Name);
