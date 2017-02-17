@@ -40,6 +40,12 @@ namespace Nutritionix
         public string Query { get; set; }
 
         /// <summary>
+        /// Multiple search terms
+        /// </summary>
+        [JsonProperty("queries")]
+        public QueryFilterCollection Queries { get; set; }
+
+        /// <summary>
         /// List of properties that should be populated on the results
         /// <example>Fields.Add(x => x.Calories)</example>
         /// </summary>
