@@ -17,18 +17,18 @@ namespace MyApp
         private const string myApiId = "xxx";
         private const string myApiKey = "abc123";
 
-        public NutritionixSearchResult[] Search(string query)
+        public SearchResult[] Search(string query)
         {
             var nutritionix = new NutritionixClient();
             nutritionix.Initialize(myApiId, myApiKey);
 
-            var request = new NutritionixSearchRequest { Query = query };
-            NutritionixSearchResponse response = nutritionix.SearchItems(request);
+            var request = new SearchRequest { Query = query };
+            SearchResponse response = nutritionix.SearchItems(request);
 
             return response.Results;
         }
 
-        public NutritionixItem Retrieve(string id)
+        public Item Retrieve(string id)
         {
             var nutritionix = new NutritionixClient();
             nutritionix.Initialize(myApiId, myApiKey);
