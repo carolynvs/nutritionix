@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace Nutritionix.Tests
@@ -12,7 +11,7 @@ namespace Nutritionix.Tests
         {
             var request = new PowerSearchRequest {MinimumScore = 0.5};
 
-            string json = JsonConvert.SerializeObject(request);
+            var json = JsonConvert.SerializeObject(request);
 
             StringAssert.Contains("\"min_score\":0.5", json);
         }
@@ -25,11 +24,11 @@ namespace Nutritionix.Tests
                 Filters = new SearchFilterCollection
                 {
                     new ItemTypeFilter {ItemType = ItemType.Restaurant},
-                    new ComparisonFilter(x => x.NutritionFact_Calories){Operator = ComparisonOperator.LessThan, Value = 100}
+                    new ComparisonFilter(x => x.NutritionFactCalories){Operator = ComparisonOperator.LessThan, Value = 100}
                 }
             };
 
-            string json = JsonConvert.SerializeObject(request);
+            var json = JsonConvert.SerializeObject(request);
 
             StringAssert.Contains("\"filters\":{\"item_type\":1,\"nf_calories\":{\"lt\":100}}", json);
         }

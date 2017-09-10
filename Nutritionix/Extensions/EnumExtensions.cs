@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Reflection;
 
 namespace Nutritionix.Extensions
 {
@@ -17,16 +16,13 @@ namespace Nutritionix.Extensions
                 return null;
 
             var attribute = GetAttribute<DescriptionAttribute>(value);
-            if (attribute == null)
-                return value.ToString();
-
-            return attribute.Description;
+            return attribute == null ? value.ToString() : attribute.Description;
         }
 
         private static T GetAttribute<T>(Enum value)
             where T : class
         {
-            FieldInfo field = value.GetType().GetField(value.ToString());
+            var field = value.GetType().GetField(value.ToString());
             return Attribute.GetCustomAttribute(field, typeof (T)) as T;
         }
     }

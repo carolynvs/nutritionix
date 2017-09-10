@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutritionix", "Nutritionix\Nutritionix.csproj", "{7B38F2B3-2184-4E40-A420-7B67CC267E0A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutritionix.Samples", "Nutritionix.Samples\Nutritionix.Samples.csproj", "{4005CF66-B61D-4592-88A1-41D5FBF011C5}"
@@ -21,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{67EB254F
 		nuget\Nutritionix.Samples.nuspec = nuget\Nutritionix.Samples.nuspec
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutritionix.Standard", "Nutritionix.Standard\Nutritionix.Standard.csproj", "{8620A186-59BB-4F72-92BA-9E7930E510F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{291324C5-BEF3-467C-8B88-E8B2070C10FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{291324C5-BEF3-467C-8B88-E8B2070C10FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{291324C5-BEF3-467C-8B88-E8B2070C10FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8620A186-59BB-4F72-92BA-9E7930E510F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8620A186-59BB-4F72-92BA-9E7930E510F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8620A186-59BB-4F72-92BA-9E7930E510F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8620A186-59BB-4F72-92BA-9E7930E510F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -17,10 +17,7 @@ namespace Nutritionix.Uris
         private readonly string _id;
         private readonly string _upc;
 
-        protected override string RelativePath
-        {
-            get { return "item"; }
-        }
+        protected override string RelativePath => "item";
 
         protected override void UpdateQueryString(NameValueCollection queryString)
         {

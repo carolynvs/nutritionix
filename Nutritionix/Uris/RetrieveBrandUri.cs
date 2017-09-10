@@ -10,9 +10,6 @@ namespace Nutritionix.Uris
 
         private readonly string _id;
 
-        protected override string RelativePath
-        {
-            get { return string.Format("brand/{0}", _id); }
-        }
+        protected override string RelativePath => $"brand/{_id}";
     }
 }

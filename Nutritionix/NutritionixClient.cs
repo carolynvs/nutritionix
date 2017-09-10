@@ -191,7 +191,7 @@ namespace Nutritionix
         {
             using(var client = CreateHttpClient())
             {
-                HttpResponseMessage response = Get(uri, client);
+                var response = Get(uri, client);
                 if(response.IsSuccessStatusCode)
                     return ReadResponse<TResult>(response);
 
@@ -203,8 +203,8 @@ namespace Nutritionix
         {
             using (var client = CreateHttpClient())
             {
-                string json = JsonConvert.SerializeObject(request, new JsonSerializerSettings{NullValueHandling = NullValueHandling.Ignore});
-                HttpResponseMessage response = Post(uri, client, json);
+                var json = JsonConvert.SerializeObject(request, new JsonSerializerSettings{NullValueHandling = NullValueHandling.Ignore});
+                var response = Post(uri, client, json);
                 if(response.IsSuccessStatusCode)
                     return ReadResponse<TResult>(response);
 
@@ -229,7 +229,7 @@ namespace Nutritionix
             }
             catch
             {
-                string error = string.Format("An error occurred sending a request to the Nutritionix API. Uri: {0}", uri);
+                var error = $"An error occurred sending a request to the Nutritionix API. Uri: {uri}";
                 throw new NutritionixException(error);
             }
         }
@@ -244,7 +244,7 @@ namespace Nutritionix
             }
             catch
             {
-                string error = string.Format("An error occurred sending a request to the Nutritionix API. Uri: {0}", uri);
+                var error = $"An error occurred sending a request to the Nutritionix API. Uri: {uri}";
                 throw new NutritionixException(error);
             }
         }
@@ -253,7 +253,7 @@ namespace Nutritionix
         {
             try
             {
-                string content = response.Content.ReadAsStringAsync().Result;
+                var content = response.Content.ReadAsStringAsync().Result;
                 return JsonConvert.DeserializeObject<TResult>(content);
             }
             catch

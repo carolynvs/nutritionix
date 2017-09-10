@@ -7,12 +7,18 @@ using Nutritionix.Extensions;
 
 namespace Nutritionix
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [JsonObject]
     public interface ISearchFilter
     {
 
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     [JsonConverter(typeof(SearchFilterCollectionConverter))]
     public class SearchFilterCollection : List<ISearchFilter>
     {
@@ -26,7 +32,7 @@ namespace Nutritionix
             var filters = (SearchFilterCollection)value;
 
             writer.WriteStartObject();
-            foreach (ISearchFilter filter in filters)
+            foreach (var filter in filters)
             {
                 serializer.Serialize(writer, filter);
             }
@@ -44,9 +50,15 @@ namespace Nutritionix
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     [JsonObject, JsonConverter(typeof(ItemTypeFilterConverter))]
     public class ItemTypeFilter : ISearchFilter
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public ItemType ItemType { get; set; }
 
         /// <summary>
@@ -87,23 +99,42 @@ namespace Nutritionix
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     [JsonObject, JsonConverter(typeof(RangeFilterConverter))]
     public class RangeFilter : ISearchFilter
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public RangeFilter()
         {
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="itemPropertyExpression"></param>
         public RangeFilter(Expression<Func<Item, decimal?>> itemPropertyExpression)
         {
             Field = itemPropertyExpression.ToJsonProperty();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Field { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public decimal From { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public decimal To { get; set; }
     }
 
@@ -132,23 +163,42 @@ namespace Nutritionix
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     [JsonObject, JsonConverter(typeof(ComparisonFilterConverter))]
     public class ComparisonFilter : ISearchFilter
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public ComparisonFilter()
         {
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="itemPropertyExpression"></param>
         public ComparisonFilter(Expression<Func<Item, decimal?>> itemPropertyExpression)
         {
             Field = itemPropertyExpression.ToJsonProperty();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Field { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ComparisonOperator Operator { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int Value { get; set; }
     }
 
@@ -176,22 +226,49 @@ namespace Nutritionix
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public enum ComparisonOperator
     {
+        /// <summary>
+        /// 
+        /// </summary>
         [Description("lt")]
         LessThan,
+        /// <summary>
+        /// 
+        /// </summary>
         [Description("lte")]
         LessThanOrEqualTo,
+        /// <summary>
+        /// 
+        /// </summary>
         [Description("gt")]
         GreaterThan,
+        /// <summary>
+        /// 
+        /// </summary>
         [Description("gte")]
         GreaterThanOrEqualTo
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public enum ItemType
     {
+        /// <summary>
+        /// 
+        /// </summary>
         Restaurant = 1,
+        /// <summary>
+        /// 
+        /// </summary>
         Packaged = 2,
+        /// <summary>
+        /// 
+        /// </summary>
         USDA = 3
     }
 }

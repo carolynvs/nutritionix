@@ -28,10 +28,7 @@ namespace Nutritionix.Uris
             _request = request;
         }
 
-        protected override string RelativePath
-        {
-            get { return string.Format("search/{0}", System.Web.HttpUtility.UrlEncode(_request.Query)); }
-        }
+        protected override string RelativePath => $"search/{System.Web.HttpUtility.UrlEncode(_request.Query)}";
 
         protected override void UpdateQueryString(NameValueCollection queryString)
         {
@@ -39,10 +36,10 @@ namespace Nutritionix.Uris
 
             if (_request.Count != null)
             {
-                int start = _request.Start ?? 0;
-                int stop = start + _request.Count.Value;
+                var start = _request.Start ?? 0;
+                var stop = start + _request.Count.Value;
 
-                queryString.Add(ResultsParam, string.Format("{0}:{1}", start, stop));
+                queryString.Add(ResultsParam, $"{start}:{stop}");
             }
 
             if(_request.BrandId != null)
@@ -71,9 +68,9 @@ namespace Nutritionix.Uris
 
             if (_request.ExcludeAllergens != null)
             {
-                foreach (Allergen allergen in _request.ExcludeAllergens)
+                foreach (var allergen in _request.ExcludeAllergens)
                 {
-                    string allergenParam = allergen.ToDescription();
+                    var allergenParam = allergen.ToDescription();
                     queryString.Add(allergenParam, "false");
                 }
             }

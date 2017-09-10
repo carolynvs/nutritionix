@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 
 // ReSharper disable CSharpWarnings::CS1591
 namespace Nutritionix
@@ -6,6 +7,7 @@ namespace Nutritionix
     /// <summary>
     /// Types of food allergens
     /// </summary>
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public enum Allergen
     {
         /// <summary>

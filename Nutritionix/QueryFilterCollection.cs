@@ -6,6 +6,9 @@ using Nutritionix.Extensions;
 
 namespace Nutritionix
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [JsonConverter(typeof(QueryFilterCollectionConverter))]
     public class QueryFilterCollection : List<QueryFilter>
     {
@@ -19,7 +22,7 @@ namespace Nutritionix
             var filters = (QueryFilterCollection)value;
 
             writer.WriteStartObject();
-            foreach (QueryFilter filter in filters)
+            foreach (var filter in filters)
             {
                 serializer.Serialize(writer, filter);
             }
@@ -37,22 +40,39 @@ namespace Nutritionix
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     [JsonObject, JsonConverter(typeof(QueryFilterConverter))]
     public class QueryFilter
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public QueryFilter()
         {
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="itemPropertyExpression"></param>
+        /// <param name="value"></param>
         public QueryFilter(Expression<Func<Item, string>> itemPropertyExpression, string value)
         {
             Field = itemPropertyExpression.ToJsonProperty();
             Value = value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Field { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Value { get; set; }
     }
 

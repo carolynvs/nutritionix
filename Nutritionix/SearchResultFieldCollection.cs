@@ -11,12 +11,12 @@ namespace Nutritionix
     public class SearchResultFieldCollection : List<string>
     {
         /// <summary>
-        /// Adds the specified field expression, converting the expression to the appropriate string reprentation.
+        /// Adds the specified field expression, converting the expression to the appropriate string representation.
         /// </summary>
         /// <param name="itemPropertyExpression">An expression representing the property on <see cref="Item"/> that should be included.</param>
         public void Add(Expression<Func<Item, object>> itemPropertyExpression)
         {
-            string jsonProperty = itemPropertyExpression.ToJsonProperty();
+            var jsonProperty = itemPropertyExpression.ToJsonProperty();
             if(jsonProperty == null)
                 return;
 

@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 
 namespace Nutritionix.Samples
 {
@@ -33,10 +33,10 @@ namespace Nutritionix.Samples
 
             var request = new SearchRequest { Query = "pie" };
 			Console.WriteLine("Searching Nutritionix for 'pie'...");
-            SearchResponse response = nutritionix.SearchItems(request);
+            var response = nutritionix.SearchItems(request);
 
 			Console.WriteLine("Displaying results 1 - {0} of {1}", response.Results.Length, response.TotalResults);
-            foreach(SearchResult result in response.Results)
+            foreach(var result in response.Results)
             {
                 Console.WriteLine("* {0}", result.Item.Name);
             }
@@ -52,8 +52,8 @@ namespace Nutritionix.Samples
             var request = new PowerSearchRequest
             {
                 Queries = new QueryFilterCollection { new QueryFilter(x => x.Name, "frap*"), new QueryFilter(x => x.BrandName, "Starbucks") },
-                Fields = new SearchResultFieldCollection {x => x.Name, x => x.BrandName, x => x.NutritionFact_Calories, x => x.ItemType},
-                SortBy = new SearchResultSort(x => x.NutritionFact_Calories, SortOrder.Descending),
+                Fields = new SearchResultFieldCollection {x => x.Name, x => x.BrandName, x => x.NutritionFactCalories, x => x.ItemType},
+                SortBy = new SearchResultSort(x => x.NutritionFactCalories, SortOrder.Descending),
                 Filters = new SearchFilterCollection
                 {
                     new ItemTypeFilter {Negated = true, ItemType = ItemType.Packaged}
@@ -61,12 +61,12 @@ namespace Nutritionix.Samples
             };
 
             Console.WriteLine("Power Searching Nutritionix for: Item Name: 'frap*' and Brand Name: 'Starbucks' sorted by calories, not a packaged food...");
-            SearchResponse response = nutritionix.SearchItems(request);
+            var response = nutritionix.SearchItems(request);
 
             Console.WriteLine("Displaying results 1 - {0} of {1}", response.Results.Length, response.TotalResults);
-            foreach (SearchResult result in response.Results)
+            foreach (var result in response.Results)
             {
-                Console.WriteLine("* {0} {1} ({2} calories) from the {3} database", result.Item.BrandName, result.Item.Name, result.Item.NutritionFact_Calories, result.Item.ItemType);
+                Console.WriteLine("* {0} {1} ({2} calories) from the {3} database", result.Item.BrandName, result.Item.Name, result.Item.NutritionFactCalories, result.Item.ItemType);
             }
 
             Console.WriteLine();
@@ -78,14 +78,14 @@ namespace Nutritionix.Samples
             nutritionix.Initialize(AppId, AppKey);
 
             Console.WriteLine("Retrieving 'Raspberry Pie' from Nutritionix...");
-            Item item = nutritionix.RetrieveItem("56dfd0652c93fba9556c02e7");
+            var item = nutritionix.RetrieveItem("56dfd0652c93fba9556c02e7");
 
             Console.WriteLine("Item Id: {0}", item.Id);
             Console.WriteLine("Item Name: {0}", item.Name);
             Console.WriteLine("Brand Name: {0}", item.BrandName);
 
-            Console.WriteLine("Calories: {0}", item.NutritionFact_Calories);
-            Console.WriteLine("Sugar: {0} g", item.NutritionFact_Sugar);
+            Console.WriteLine("Calories: {0}", item.NutritionFactCalories);
+            Console.WriteLine("Sugar: {0} g", item.NutritionFactSugar);
 
             Console.WriteLine();
         }
@@ -97,14 +97,14 @@ namespace Nutritionix.Samples
 
             const string upc = "029000071087";
             Console.WriteLine("Looking up UPC code: {0}...", upc);
-            Item item = nutritionix.RetrieveItemByUPC(upc);
+            var item = nutritionix.RetrieveItemByUPC(upc);
 
             Console.WriteLine("Item Id: {0}", item.Id);
             Console.WriteLine("Item Name: {0}", item.Name);
             Console.WriteLine("Brand Name: {0}", item.BrandName);
 
-            Console.WriteLine("Calories: {0}", item.NutritionFact_Calories);
-            Console.WriteLine("Sugar: {0} g", item.NutritionFact_Sugar);
+            Console.WriteLine("Calories: {0}", item.NutritionFactCalories);
+            Console.WriteLine("Sugar: {0} g", item.NutritionFactSugar);
 
             Console.WriteLine();
         }
@@ -115,7 +115,7 @@ namespace Nutritionix.Samples
             nutritionix.Initialize(AppId, AppKey);
 
             Console.WriteLine("Retrieving 'Taco Bell' from Nutritionix...");
-            Brand brand = nutritionix.RetrieveBrand("513fbc1283aa2dc80c000020");
+            var brand = nutritionix.RetrieveBrand("513fbc1283aa2dc80c000020");
 
             Console.WriteLine("Brand Id: {0}", brand.Id);
             Console.WriteLine("Brand Name: {0}", brand.Name);
@@ -133,10 +133,10 @@ namespace Nutritionix.Samples
 
             var request = new SearchRequest { BrandId = "513fbc1283aa2dc80c000024" };
             Console.WriteLine("Searching Nutritionix for the Olive Garden brand...");
-            SearchResponse response = nutritionix.SearchItems(request);
+            var response = nutritionix.SearchItems(request);
 
             Console.WriteLine("Displaying results 1 - {0} of {1}", response.Results.Length, response.TotalResults);
-            foreach (SearchResult result in response.Results)
+            foreach (var result in response.Results)
             {
                 Console.WriteLine("* {0}", result.Item.Name);
             }

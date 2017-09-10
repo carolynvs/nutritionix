@@ -31,10 +31,7 @@ namespace Nutritionix
         /// Url of the brand's logo
         /// </summary>
         [JsonIgnore]
-        public string LogoUrl
-        {
-            get { return string.Format("http://res.cloudinary.com/nutritionix/image/upload/w_50,h_50,c_fit/{0}.jpg", Id); }
-        }
+        public string LogoUrl => $"http://res.cloudinary.com/nutritionix/image/upload/w_50,h_50,c_fit/{Id}.jpg";
 
         /// <summary>
         /// Brand Type

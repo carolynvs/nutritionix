@@ -16,17 +16,15 @@ namespace Nutritionix.Extensions
         /// <exception cref="ArgumentException"></exception>
         public static string ToJsonProperty<TProperty>(this Expression<Func<Item, TProperty>> itemPropertyExpression)
         {
-            MemberInfo property = itemPropertyExpression.Body.GetMember();
+            var property = itemPropertyExpression.Body.GetMember();
             if (property == null)
             {
-                throw new ArgumentException("The expression must represent a property on Nutritionix.Item", "itemPropertyExpression");
+                throw new ArgumentException("The expression must represent a property on Nutritionix.Item", nameof(itemPropertyExpression));
             }
 
             var jsonName = property.GetCustomAttributes(true).OfType<JsonPropertyAttribute>().FirstOrDefault();
-            if(jsonName == null)
-                return null;
 
-            return jsonName.PropertyName;
+            return jsonName?.PropertyName;
         }
 
         public static string GetMemberName(this LambdaExpression memberExpression)
@@ -41,22 +39,20 @@ namespace Nutritionix.Extensions
 
         private static MemberInfo GetMember(this Expression expression)
         {
-            var member = expression as MemberExpression;
-            if (member != null)
+            while (true)
             {
-                return member.Member;
-            }
-
-            var cast = expression as UnaryExpression;
-            if (cast != null)
-            {
-                if(cast.NodeType == ExpressionType.Convert)
+                var member = expression as MemberExpression;
+                if (member != null)
                 {
-                    return GetMember(cast.Operand);
+                    return member.Member;
                 }
-            }
 
-            throw new Exception(string.Format("The expression, {0}, does not represent a member.", expression));
+                var cast = expression as UnaryExpression;
+                if (cast?.NodeType != ExpressionType.Convert)
+                    throw new Exception($"The expression, {expression}, does not represent a member.");
+                expression = cast.Operand;
+                continue;
+            }
         }
     }
 }
