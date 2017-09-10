@@ -45,7 +45,7 @@ namespace Nutritionix
 
                 return _item;
             }
-            set { _item = value; }
+            set => _item = value;
         }
 
         [JsonIgnore]

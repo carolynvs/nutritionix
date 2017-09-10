@@ -11,7 +11,7 @@ namespace Nutritionix.Tests
         {
             var queryFilterCollection = new QueryFilterCollection { new QueryFilter(x => x.Name, "Food") };
 
-            string json = JsonConvert.SerializeObject(queryFilterCollection);
+            var json = JsonConvert.SerializeObject(queryFilterCollection);
             StringAssert.Contains("{\"item_name\":\"Food\"}", json);
         }
     }

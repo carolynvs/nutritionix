@@ -10,11 +10,20 @@ namespace Nutritionix
     public class Item
     {
         /// <summary>
+        /// Old API ID
+        /// </summary>
+        [JsonProperty("old_api_id")]
+        public string OldApiId { get; set; }
+
+        /// <summary>
         /// Item ID
         /// </summary>
         [JsonProperty("item_id")]
         public string Id { get; set; }
 
+        /// <summary>
+        /// Restaurant = 1, Packaged = 2, USDA = 3
+        /// </summary>
         [JsonProperty("item_type")]
         public ItemType ItemType { get; set; }
 
@@ -23,6 +32,12 @@ namespace Nutritionix
         /// </summary>
         [JsonProperty("item_name")]
         public string Name { get; set; }
+
+        /// <summary>
+        /// ?
+        /// </summary>
+        [JsonProperty("leg_loc_id")]
+        public string LegLocId { get; set; }
 
         /// <summary>
         /// Brand ID
@@ -64,180 +79,180 @@ namespace Nutritionix
         /// Total Calories
         /// </summary>
         [JsonProperty("nf_calories")]
-        public decimal? NutritionFact_Calories { get; set; }
+        public decimal? NutritionFactCalories { get; set; }
 
         /// <summary>
         /// Calories from Fat (calculated)
         /// </summary>
         [JsonProperty("nf_calories_from_fat")]
-        public decimal? NutritionFact_CaloriesFromFat { get; set; }
+        public decimal? NutritionFactCaloriesFromFat { get; set; }
 
         /// <summary>
         /// Total Fat
         /// </summary>
         [JsonProperty("nf_total_fat")]
-        public decimal? NutritionFact_TotalFat { get; set; }
+        public decimal? NutritionFactTotalFat { get; set; }
 
         /// <summary>
         /// Saturated Fat
         /// </summary>
         [JsonProperty("nf_saturated_fat")]
-        public decimal? NutritionFact_SaturatedFat { get; set; }
+        public decimal? NutritionFactSaturatedFat { get; set; }
 
         /// <summary>
         /// Trans Fat
         /// </summary>
         [JsonProperty("nf_trans_fatty_acid")]
-        public decimal? NutritionFact_TransFat { get; set; }
+        public decimal? NutritionFactTransFat { get; set; }
 
         /// <summary>
         /// Polyunsaturated Fat
         /// </summary>
         [JsonProperty("nf_polyunsaturated_fat")]
-        public decimal? NutritionFact_PolyunsaturatedFat { get; set; }
+        public decimal? NutritionFactPolyunsaturatedFat { get; set; }
 
         /// <summary>
         /// Monounsaturated Fat
         /// </summary>
         [JsonProperty("nf_monounsaturated_fat")]
-        public decimal? NutritionFact_MonounsaturatedFat { get; set; }
+        public decimal? NutritionFactMonounsaturatedFat { get; set; }
 
         /// <summary>
         /// Cholesterol
         /// </summary>
         [JsonProperty("nf_cholesterol")]
-        public decimal? NutritionFact_Cholesterol { get; set; }
+        public decimal? NutritionFactCholesterol { get; set; }
 
         /// <summary>
         /// Sodium
         /// </summary>
         [JsonProperty("nf_sodium")]
-        public decimal? NutritionFact_Sodium { get; set; }
+        public decimal? NutritionFactSodium { get; set; }
 
         /// <summary>
         /// Total Carbohydrate
         /// </summary>
         [JsonProperty("nf_total_carbohydrate")]
-        public decimal? NutritionFact_TotalCarbohydrate { get; set; }
+        public decimal? NutritionFactTotalCarbohydrate { get; set; }
 
         /// <summary>
         /// Dietary Fiber
         /// </summary>
         [JsonProperty("nf_dietary_fiber")]
-        public decimal? NutritionFact_DietaryFiber { get; set; }
+        public decimal? NutritionFactDietaryFiber { get; set; }
 
         /// <summary>
         /// Sugar
         /// </summary>
         [JsonProperty("nf_sugars")]
-        public decimal? NutritionFact_Sugar { get; set; }
+        public decimal? NutritionFactSugar { get; set; }
 
         /// <summary>
         /// Protein
         /// </summary>
         [JsonProperty("nf_protein")]
-        public decimal? NutritionFact_Protein { get; set; }
+        public decimal? NutritionFactProtein { get; set; }
 
         /// <summary>
         /// Vitamin A (Daily Value %)
         /// </summary>
         [JsonProperty("nf_vitamin_a_dv")]
-        public decimal? NutritionFact_VitaminA { get; set; }
+        public decimal? NutritionFactVitaminA { get; set; }
 
         /// <summary>
         /// Vitamin C (Daily Value %)
         /// </summary>
         [JsonProperty("nf_vitamin_c_dv")]
-        public decimal? NutritionFact_VitaminC { get; set; }
+        public decimal? NutritionFactVitaminC { get; set; }
 
         /// <summary>
         /// Calcium (Daily Value %)
         /// </summary>
         [JsonProperty("nf_calcium_dv")]
-        public decimal? NutritionFact_Calcium { get; set; }
+        public decimal? NutritionFactCalcium { get; set; }
 
         /// <summary>
         /// Iron (Daily Value %)
         /// </summary>
         [JsonProperty("nf_iron_dv")]
-        public decimal? NutritionFact_Iron { get; set; }
+        public decimal? NutritionFactIron { get; set; }
 
         /// <summary>
         /// Number of servings in a container
         /// </summary>
         [JsonProperty("nf_servings_per_container")]
-        public decimal? NutritionFact_ServingsPerContainer { get; set; }
+        public decimal? NutritionFactServingsPerContainer { get; set; }
 
         /// <summary>
         /// Serving size quantity
         /// </summary>
         [JsonProperty("nf_serving_size_qty")]
-        public decimal? NutritionFact_ServingSizeQuantity { get; set; }
+        public decimal? NutritionFactServingSizeQuantity { get; set; }
 
         /// <summary>
         /// Serving size unit
         /// </summary>
         [JsonProperty("nf_serving_size_unit")]
-        public string NutritionFact_ServingSizeUnit { get; set; }
+        public string NutritionFactServingSizeUnit { get; set; }
 
         /// <summary>
         /// Weight of a serving in grams
         /// </summary>
         [JsonProperty("nf_serving_weight_grams")]
-        public decimal? NutritionFact_ServingGramWeight { get; set; }
+        public decimal? NutritionFactServingGramWeight { get; set; }
 
         /// <summary>
         /// Flag specifying if the item is known to contain the allergen: Milk
         /// </summary>
         [JsonProperty("allergen_contains_milk")]
-        public bool? Allergen_ContainsMilk { get; set; }
+        public bool? AllergenContainsMilk { get; set; }
 
         /// <summary>
         /// Flag specifying if the item is known to contain the allergen: Eggs
         /// </summary>
         [JsonProperty("allergen_contains_eggs")]
-        public bool? Allergen_ContainsEggs { get; set; }
+        public bool? AllergenContainsEggs { get; set; }
 
         /// <summary>
         /// Flag specifying if the item is known to contain the allergen: Fish
         /// </summary>
         [JsonProperty("allergen_contains_fish")]
-        public bool? Allergen_ContainsFish { get; set; }
+        public bool? AllergenContainsFish { get; set; }
 
         /// <summary>
         /// Flag specifying if the item is known to contain the allergen: Shellfish
         /// </summary>
         [JsonProperty("allergen_contains_shellfish")]
-        public bool? Allergen_ContainsShellfish { get; set; }
+        public bool? AllergenContainsShellfish { get; set; }
 
         /// <summary>
         /// Flag specifying if the item is known to contain the allergen: Tree Nuts
         /// </summary>
         [JsonProperty("allergen_contains_tree_nuts")]
-        public bool? Allergen_ContainsTreeNuts { get; set; }
+        public bool? AllergenContainsTreeNuts { get; set; }
 
         /// <summary>
         /// Flag specifying if the item is known to contain the allergen: Peanuts
         /// </summary>
         [JsonProperty("allergen_contains_peanuts")]
-        public bool? Allergen_ContainsPeanuts { get; set; }
+        public bool? AllergenContainsPeanuts { get; set; }
 
         /// <summary>
         /// Flag specifying if the item is known to contain the allergen: Wheat
         /// </summary>
         [JsonProperty("allergen_contains_wheat")]
-        public bool? Allergen_ContainsWheat { get; set; }
+        public bool? AllergenContainsWheat { get; set; }
 
         /// <summary>
         /// Flag specifying if the item is known to contain the allergen: Soy
         /// </summary>
         [JsonProperty("allergen_contains_soybeans")]
-        public bool? Allergen_ContainsSoy { get; set; }
+        public bool? AllergenContainsSoy { get; set; }
 
         /// <summary>
         /// Flag specifying if the item is known to contain the allergen: Gluten
         /// </summary>
         [JsonProperty("allergen_contains_gluten")]
-        public bool? Allergen_ContainsGluten { get; set; }
+        public bool? AllergenContainsGluten { get; set; }
     }
 }

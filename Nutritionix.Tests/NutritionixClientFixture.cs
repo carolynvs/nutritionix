@@ -29,11 +29,11 @@ namespace Nutritionix.Tests
                 TotalResults = 0,
                 Results = null
             };
-            string json = JsonConvert.SerializeObject(sampleResponse);
+            var json = JsonConvert.SerializeObject(sampleResponse);
             MockResponse(json);
 
             var request = new SearchRequest {Query = "foobar"};
-            SearchResponse response = _nutritionix.SearchItems(request);
+            var response = _nutritionix.SearchItems(request);
 
             Assert.IsNotNull(response.Results);
             Assert.AreEqual(0, response.Results.Length);
@@ -47,11 +47,11 @@ namespace Nutritionix.Tests
                 TotalResults = 1,
                 Results = new[] {new SearchResult()}
             };
-            string json = JsonConvert.SerializeObject(sampleResponse);
+            var json = JsonConvert.SerializeObject(sampleResponse);
             MockResponse(json);
 
             var request = new SearchRequest {Query = "foobar"};
-            SearchResponse response = _nutritionix.SearchItems(request);
+            var response = _nutritionix.SearchItems(request);
 
             Assert.AreEqual(1, response.Results.Length);
         }
@@ -64,11 +64,11 @@ namespace Nutritionix.Tests
                 TotalResults = 1,
                 Results = new[] {new SearchResult()}
             };
-            string json = JsonConvert.SerializeObject(sampleResponse);
+            var json = JsonConvert.SerializeObject(sampleResponse);
             MockResponse(json);
 
             var request = new PowerSearchRequest {Query = "foobar"};
-            SearchResponse response = _nutritionix.SearchItems(request);
+            var response = _nutritionix.SearchItems(request);
 
             Assert.AreEqual(1, response.Results.Length);
         }
@@ -90,7 +90,7 @@ namespace Nutritionix.Tests
             MockResponse(string.Empty, HttpStatusCode.BadRequest);
 
             var request = new SearchRequest {Query = "foobar"};
-            SearchResponse response = _nutritionix.SearchItems(request);
+            var response = _nutritionix.SearchItems(request);
 
             Assert.AreEqual(0, response.Results.Length);
         }

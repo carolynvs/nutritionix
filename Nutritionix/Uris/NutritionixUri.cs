@@ -42,10 +42,10 @@ namespace Nutritionix.Uris
 
         private static void RemoveEmptyQueryStringParameters(NameValueCollection queryString)
         {
-            for(int i = queryString.Count-1; i >= 0; i--)
+            for(var i = queryString.Count-1; i >= 0; i--)
             {
-                string key = queryString.GetKey(i);
-                string value = queryString[key];
+                var key = queryString.GetKey(i);
+                var value = queryString[key];
                 if(value.IsNullOrEmpty())
                 {
                     queryString.Remove(key);
@@ -64,10 +64,10 @@ namespace Nutritionix.Uris
             {
                 var queryString = BuildQueryString();
 
-                return string.Format("{0}{1}?{2}", RootPath, RelativePath, queryString);
+                return $"{RootPath}{RelativePath}?{queryString}";
             }
 
-            return string.Format("{0}{1}", RootPath, RelativePath);
+            return $"{RootPath}{RelativePath}";
         }
     }
 }

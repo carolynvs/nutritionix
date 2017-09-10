@@ -11,7 +11,7 @@ namespace Nutritionix.Tests
         {
             var uri = new RetrieveItemUri("myId", "myKey", "itemId");
             
-            string result = uri.ToString();
+            var result = uri.ToString();
 
             StringAssert.Contains("appId=myId", result);
         }
@@ -21,7 +21,7 @@ namespace Nutritionix.Tests
         {
             var uri = new RetrieveItemUri("myId", "myKey", "itemId");
             
-            string result = uri.ToString();
+            var result = uri.ToString();
 
             StringAssert.Contains("appKey=myKey", result);
         }
@@ -31,7 +31,7 @@ namespace Nutritionix.Tests
         {
             var uri = new RetrieveItemUri("myId", "myKey", "itemId");
             
-            string result = uri.ToString();
+            var result = uri.ToString();
 
             StringAssert.Contains("id=itemId", result);
         }
@@ -41,7 +41,7 @@ namespace Nutritionix.Tests
         {
             var uri = new RetrieveItemUri("myId", "myKey", upc: "myUPC");
             
-            string result = uri.ToString();
+            var result = uri.ToString();
 
             StringAssert.Contains("upc=myUPC", result);
         }

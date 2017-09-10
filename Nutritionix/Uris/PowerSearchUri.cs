@@ -15,9 +15,6 @@ namespace Nutritionix.Uris
             IncludeQueryString = false;
         }
 
-        protected override string RelativePath
-        {
-            get { return "search"; }
-        }
+        protected override string RelativePath => "search";
     }
 }
